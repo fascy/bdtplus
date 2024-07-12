@@ -1,0 +1,36 @@
+2022-07-13 04:05:34,556 socket_server.py [line:86] run INFO node id 12 is running on pid 5099 
+2022-07-13 04:05:34,557 socket_server.py [line:38] _listen_and_recv_forever INFO node 12's socket server starts to listen ingoing connections on process id 5099 
+2022-07-13 04:05:34,605 socket_server.py [line:44] _handler INFO node id 12 server is connected by node 2 
+2022-07-13 04:05:34,606 socket_server.py [line:44] _handler INFO node id 12 server is connected by node 5 
+2022-07-13 04:05:34,610 socket_server.py [line:44] _handler INFO node id 12 server is connected by node 12 
+2022-07-13 04:05:34,665 socket_server.py [line:44] _handler INFO node id 12 server is connected by node 1 
+2022-07-13 04:05:34,727 socket_server.py [line:44] _handler INFO node id 12 server is connected by node 10 
+2022-07-13 04:05:34,843 socket_server.py [line:44] _handler INFO node id 12 server is connected by node 6 
+2022-07-13 04:05:34,866 socket_server.py [line:44] _handler INFO node id 12 server is connected by node 0 
+2022-07-13 04:05:34,914 socket_server.py [line:44] _handler INFO node id 12 server is connected by node 3 
+2022-07-13 04:05:34,915 socket_server.py [line:44] _handler INFO node id 12 server is connected by node 15 
+2022-07-13 04:05:35,018 socket_server.py [line:44] _handler INFO node id 12 server is connected by node 7 
+2022-07-13 04:05:35,022 socket_server.py [line:44] _handler INFO node id 12 server is connected by node 13 
+2022-07-13 04:05:35,087 socket_server.py [line:44] _handler INFO node id 12 server is connected by node 4 
+2022-07-13 04:05:35,137 socket_server.py [line:44] _handler INFO node id 12 server is connected by node 14 
+2022-07-13 04:05:35,204 socket_server.py [line:44] _handler INFO node id 12 server is connected by node 11 
+2022-07-13 04:05:35,294 socket_server.py [line:44] _handler INFO node id 12 server is connected by node 8 
+2022-07-13 04:05:35,298 socket_server.py [line:44] _handler INFO node id 12 server is connected by node 9 
+2024-07-12 16:53:47,070 socket_server.py [line:86] run INFO node id 12 is running on pid 28758 
+2024-07-12 16:53:47,070 socket_server.py [line:37] _listen_and_recv_forever INFO node 12's socket server starts to listen ingoing connections on process id 28758 
+2024-07-12 16:53:47,083 socket_server.py [line:44] _handler INFO node id 12 server is connected by node 6 
+2024-07-12 16:53:47,083 socket_server.py [line:44] _handler INFO node id 12 server is connected by node 15 
+2024-07-12 16:53:47,084 socket_server.py [line:44] _handler INFO node id 12 server is connected by node 2 
+2024-07-12 16:53:47,084 socket_server.py [line:44] _handler INFO node id 12 server is connected by node 0 
+2024-07-12 16:53:47,084 socket_server.py [line:44] _handler INFO node id 12 server is connected by node 4 
+2024-07-12 16:53:47,087 socket_server.py [line:44] _handler INFO node id 12 server is connected by node 1 
+2024-07-12 16:53:47,090 socket_server.py [line:44] _handler INFO node id 12 server is connected by node 5 
+2024-07-12 16:53:47,090 socket_server.py [line:44] _handler INFO node id 12 server is connected by node 14 
+2024-07-12 16:53:47,091 socket_server.py [line:44] _handler INFO node id 12 server is connected by node 9 
+2024-07-12 16:53:47,091 socket_server.py [line:44] _handler INFO node id 12 server is connected by node 11 
+2024-07-12 16:53:47,092 socket_server.py [line:44] _handler INFO node id 12 server is connected by node 12 
+2024-07-12 16:53:47,098 socket_server.py [line:44] _handler INFO node id 12 server is connected by node 7 
+2024-07-12 16:53:47,116 socket_server.py [line:44] _handler INFO node id 12 server is connected by node 3 
+2024-07-12 16:53:47,158 socket_server.py [line:44] _handler INFO node id 12 server is connected by node 10 
+2024-07-12 16:53:47,175 socket_server.py [line:44] _handler INFO node id 12 server is connected by node 13 
+2024-07-12 16:53:47,200 socket_server.py [line:44] _handler INFO node id 12 server is connected by node 8 

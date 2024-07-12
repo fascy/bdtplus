@@ -1,0 +1,76 @@
+2022-07-13 04:05:41,897 ng_k_s.py [line:470] run_bft INFO Node 7 starts to run at time:1657656341.8973835 
+2022-07-13 04:05:41,943 ng_k_s.py [line:382] _finalize_output INFO ************************************************************* 
+2022-07-13 04:05:41,944 ng_k_s.py [line:383] _finalize_output INFO                          warm-up start                        
+2022-07-13 04:05:41,944 ng_k_s.py [line:384] _finalize_output INFO ************************************************************* 
+2022-07-13 04:05:46,850 ng_k_s.py [line:390] _finalize_output INFO warm-up time: 4.953031 
+2022-07-13 04:05:46,855 ng_k_s.py [line:391] _finalize_output INFO ************************************************************* 
+2022-07-13 04:05:46,855 ng_k_s.py [line:392] _finalize_output INFO                        warm-up finished                       
+2022-07-13 04:05:46,855 ng_k_s.py [line:393] _finalize_output INFO ************************************************************* 
+2022-07-13 04:05:48,202 ng_k_s.py [line:453] _finalize_output INFO node: 7 epoch: 1 run: 6.305271, total delivered Txs after warm-up: 13000, average delay after warm-up: 4.002316,  tps after warm-up: 9613.672352, average vaba delay after warm-up: 0.673356 
+2022-07-13 04:05:49,439 ng_k_s.py [line:330] _run_VABA_round INFO sid: 7: 0 txs batches need to call help in epoch 2, 0 in total, 0.000000  
+2022-07-13 04:05:49,441 ng_k_s.py [line:453] _finalize_output INFO node: 7 epoch: 2 run: 7.544289, total delivered Txs after warm-up: 18600, average delay after warm-up: 3.733039,  tps after warm-up: 7177.980598, average vaba delay after warm-up: 0.857999 
+2022-07-13 04:05:49,496 ng_k_s.py [line:288] catch INFO sid: 7: 0 txs batches need to call help after 50ms in epoch 2, 0 in total, 0.000000  
+2022-07-13 04:05:49,549 ng_k_s.py [line:302] catch INFO sid: 7: 0 txs batches need to call help after 100ms in epoch 2, 0 in total, 0.000000  
+2022-07-13 04:05:50,755 ng_k_s.py [line:330] _run_VABA_round INFO sid: 7: 0 txs batches need to call help in epoch 3, 0 in total, 0.000000  
+2022-07-13 04:05:50,756 ng_k_s.py [line:453] _finalize_output INFO node: 7 epoch: 3 run: 8.858752, total delivered Txs after warm-up: 25400, average delay after warm-up: 3.558407,  tps after warm-up: 6503.280785, average vaba delay after warm-up: 0.971636 
+2022-07-13 04:05:50,808 ng_k_s.py [line:288] catch INFO sid: 7: 0 txs batches need to call help after 50ms in epoch 3, 0 in total, 0.000000  
+2022-07-13 04:05:50,860 ng_k_s.py [line:302] catch INFO sid: 7: 0 txs batches need to call help after 100ms in epoch 3, 0 in total, 0.000000  
+2022-07-13 04:05:52,333 ng_k_s.py [line:330] _run_VABA_round INFO sid: 7: 0 txs batches need to call help in epoch 4, 0 in total, 0.000000  
+2022-07-13 04:05:52,338 ng_k_s.py [line:453] _finalize_output INFO node: 7 epoch: 4 run: 10.440694, total delivered Txs after warm-up: 31100, average delay after warm-up: 3.500861,  tps after warm-up: 5667.256858, average vaba delay after warm-up: 1.093562 
+2022-07-13 04:05:52,395 ng_k_s.py [line:288] catch INFO sid: 7: 0 txs batches need to call help after 50ms in epoch 4, 0 in total, 0.000000  
+2022-07-13 04:05:52,451 ng_k_s.py [line:302] catch INFO sid: 7: 0 txs batches need to call help after 100ms in epoch 4, 0 in total, 0.000000  
+2024-07-12 16:53:48,039 sufp_node.py [line:79] run INFO node 7's starts to run consensus on process id 28572 
+2024-07-12 16:53:48,039 sufp_node.py [line:80] run INFO parameters: N=16, f=5, S=10, T=1, fast-batch=10000, acs-batch=62, K=1, O=0 
+2024-07-12 16:53:48,040 sufp_node.py [line:62] prepare_bootstrap INFO node id 7 is inserting dummy payload TXs 
+2024-07-12 16:53:48,040 sufp_node.py [line:70] prepare_bootstrap INFO node id 7 just inserts 50000 TXs 
+2024-07-12 16:53:48,040 sufp_node.py [line:70] prepare_bootstrap INFO node id 7 just inserts 50000 TXs 
+2024-07-12 16:53:48,040 sufp_node.py [line:74] prepare_bootstrap INFO node id 7 completed the loading of dummy TXs 
+2024-07-12 16:53:48,040 Superfast.py [line:178] run_bft INFO Node 7 starts to run at time:1720774428.0408502 
+2024-07-12 16:53:48,040 Superfast.py [line:231] _run_epoch INFO Node enters epoch 0 
+2024-07-12 16:53:48,041 superfastpath.py [line:43] sufastpath INFO Entering fast path 
+2024-07-12 16:53:48,041 superfastpath.py [line:225] one_slot INFO Entering slot 1 
+2024-07-12 16:53:48,088 superfastpath.py [line:295] one_slot INFO Leaving slot 1 
+2024-07-12 16:53:48,088 superfastpath.py [line:225] one_slot INFO Entering slot 2 
+2024-07-12 16:53:48,615 superfastpath.py [line:286] one_slot INFO Fast block at Node 7 for Epoch sidAFAST0 and Slot 1 has delay, TPS and TXs: 0.520871639251709, 10000 
+2024-07-12 16:53:48,615 superfastpath.py [line:288] one_slot INFO AVG TPS: 17426, delay: 0.520872 
+2024-07-12 16:53:48,615 superfastpath.py [line:295] one_slot INFO Leaving slot 2 
+2024-07-12 16:53:48,615 superfastpath.py [line:225] one_slot INFO Entering slot 3 
+2024-07-12 16:53:48,960 superfastpath.py [line:286] one_slot INFO Fast block at Node 7 for Epoch sidAFAST0 and Slot 2 has delay, TPS and TXs: 0.8360080718994141, 10000 
+2024-07-12 16:53:48,960 superfastpath.py [line:288] one_slot INFO AVG TPS: 21777, delay: 0.678440 
+2024-07-12 16:53:48,960 superfastpath.py [line:295] one_slot INFO Leaving slot 3 
+2024-07-12 16:53:48,960 superfastpath.py [line:225] one_slot INFO Entering slot 4 
+2024-07-12 16:53:49,286 superfastpath.py [line:286] one_slot INFO Fast block at Node 7 for Epoch sidAFAST0 and Slot 3 has delay, TPS and TXs: 0.6238303184509277, 10000 
+2024-07-12 16:53:49,286 superfastpath.py [line:288] one_slot INFO AVG TPS: 24107, delay: 0.660237 
+2024-07-12 16:53:49,286 superfastpath.py [line:295] one_slot INFO Leaving slot 4 
+2024-07-12 16:53:49,286 superfastpath.py [line:225] one_slot INFO Entering slot 5 
+2024-07-12 16:53:49,637 superfastpath.py [line:286] one_slot INFO Fast block at Node 7 for Epoch sidAFAST0 and Slot 4 has delay, TPS and TXs: 0.6635158061981201, 10000 
+2024-07-12 16:53:49,637 superfastpath.py [line:288] one_slot INFO AVG TPS: 25061, delay: 0.661056 
+2024-07-12 16:53:49,638 superfastpath.py [line:295] one_slot INFO Leaving slot 5 
+2024-07-12 16:53:49,638 superfastpath.py [line:225] one_slot INFO Entering slot 6 
+2024-07-12 16:53:50,095 superfastpath.py [line:286] one_slot INFO Fast block at Node 7 for Epoch sidAFAST0 and Slot 5 has delay, TPS and TXs: 0.7783181667327881, 10000 
+2024-07-12 16:53:50,097 superfastpath.py [line:288] one_slot INFO AVG TPS: 24328, delay: 0.684509 
+2024-07-12 16:53:50,097 superfastpath.py [line:295] one_slot INFO Leaving slot 6 
+2024-07-12 16:53:50,097 superfastpath.py [line:225] one_slot INFO Entering slot 7 
+2024-07-12 16:53:50,560 superfastpath.py [line:286] one_slot INFO Fast block at Node 7 for Epoch sidAFAST0 and Slot 6 has delay, TPS and TXs: 0.8590247631072998, 10000 
+2024-07-12 16:53:50,561 superfastpath.py [line:288] one_slot INFO AVG TPS: 23815, delay: 0.713595 
+2024-07-12 16:53:50,561 superfastpath.py [line:295] one_slot INFO Leaving slot 7 
+2024-07-12 16:53:50,561 superfastpath.py [line:225] one_slot INFO Entering slot 8 
+2024-07-12 16:53:50,866 superfastpath.py [line:286] one_slot INFO Fast block at Node 7 for Epoch sidAFAST0 and Slot 7 has delay, TPS and TXs: 0.7333900928497314, 10000 
+2024-07-12 16:53:50,866 superfastpath.py [line:288] one_slot INFO AVG TPS: 24785, delay: 0.716423 
+2024-07-12 16:53:50,867 superfastpath.py [line:295] one_slot INFO Leaving slot 8 
+2024-07-12 16:53:50,867 superfastpath.py [line:225] one_slot INFO Entering slot 9 
+2024-07-12 16:53:51,175 superfastpath.py [line:286] one_slot INFO Fast block at Node 7 for Epoch sidAFAST0 and Slot 8 has delay, TPS and TXs: 0.5806357860565186, 10000 
+2024-07-12 16:53:51,175 superfastpath.py [line:288] one_slot INFO AVG TPS: 25527, delay: 0.699449 
+2024-07-12 16:53:51,175 superfastpath.py [line:295] one_slot INFO Leaving slot 9 
+2024-07-12 16:53:51,176 superfastpath.py [line:225] one_slot INFO Entering slot 10 
+2024-07-12 16:53:51,364 superfastpath.py [line:286] one_slot INFO Fast block at Node 7 for Epoch sidAFAST0 and Slot 9 has delay, TPS and TXs: 0.48492884635925293, 10000 
+2024-07-12 16:53:51,364 superfastpath.py [line:288] one_slot INFO AVG TPS: 27089, delay: 0.675614 
+2024-07-12 16:53:51,364 superfastpath.py [line:295] one_slot INFO Leaving slot 10 
+2024-07-12 16:53:51,364 superfastpath.py [line:225] one_slot INFO Entering slot 11 
+2024-07-12 16:53:51,490 superfastpath.py [line:286] one_slot INFO Fast block at Node 7 for Epoch sidAFAST0 and Slot 10 has delay, TPS and TXs: 0.24572420120239258, 10000 
+2024-07-12 16:53:51,490 superfastpath.py [line:288] one_slot INFO AVG TPS: 28995, delay: 0.632625 
+2024-07-12 16:53:51,492 superfastpath.py [line:295] one_slot INFO Leaving slot 11 
+2024-07-12 16:53:51,493 superfastpath.py [line:359] sufastpath INFO Leaves fastpath at 12 slot 
+2024-07-12 16:53:51,494 Superfast.py [line:308] wait_for_fastpath INFO Fastpath of epoch 0 completed 
+2024-07-12 16:53:51,494 Superfast.py [line:336] _run_epoch INFO Fastpath tps: 28958 
+2024-07-12 16:53:56,499 Superfast.py [line:208] run_bft INFO node 7 breaks in 8.458443 seconds in epoch 0 with total delivered Txs 100000 and average delay 0.632625 

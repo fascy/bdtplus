@@ -1,0 +1,272 @@
+2024-07-12 16:37:18,295 sufp_node.py [line:79] run INFO node 1's starts to run consensus on process id 28099 
+2024-07-12 16:37:18,296 sufp_node.py [line:80] run INFO parameters: N=4, f=1, S=10, T=1, fast-batch=10000, acs-batch=250, K=1, O=0 
+2024-07-12 16:37:18,296 sufp_node.py [line:62] prepare_bootstrap INFO node id 1 is inserting dummy payload TXs 
+2024-07-12 16:37:18,297 sufp_node.py [line:70] prepare_bootstrap INFO node id 1 just inserts 50000 TXs 
+2024-07-12 16:37:18,297 sufp_node.py [line:70] prepare_bootstrap INFO node id 1 just inserts 50000 TXs 
+2024-07-12 16:37:18,297 sufp_node.py [line:74] prepare_bootstrap INFO node id 1 completed the loading of dummy TXs 
+2024-07-12 16:37:18,298 Superfast.py [line:178] run_bft INFO Node 1 starts to run at time:1720773438.2980177 
+2024-07-12 16:37:18,298 Superfast.py [line:231] _run_epoch INFO Node enters epoch 0 
+2024-07-12 16:37:18,299 superfastpath.py [line:43] sufastpath INFO Entering fast path 
+2024-07-12 16:37:18,299 superfastpath.py [line:225] one_slot INFO Entering slot 1 
+2024-07-12 16:37:18,540 superfastpath.py [line:295] one_slot INFO Leaving slot 1 
+2024-07-12 16:37:18,540 superfastpath.py [line:225] one_slot INFO Entering slot 2 
+2024-07-12 16:37:18,614 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 1 has delay, TPS and TXs: 0.30448150634765625, 10000 
+2024-07-12 16:37:18,614 superfastpath.py [line:288] one_slot INFO AVG TPS: 31742, delay: 0.304482 
+2024-07-12 16:37:18,614 superfastpath.py [line:295] one_slot INFO Leaving slot 2 
+2024-07-12 16:37:18,615 superfastpath.py [line:225] one_slot INFO Entering slot 3 
+2024-07-12 16:37:18,693 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 2 has delay, TPS and TXs: 0.1428356170654297, 10000 
+2024-07-12 16:37:18,694 superfastpath.py [line:288] one_slot INFO AVG TPS: 50740, delay: 0.223659 
+2024-07-12 16:37:18,694 superfastpath.py [line:295] one_slot INFO Leaving slot 3 
+2024-07-12 16:37:18,694 superfastpath.py [line:225] one_slot INFO Entering slot 4 
+2024-07-12 16:37:18,760 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 3 has delay, TPS and TXs: 0.13295626640319824, 10000 
+2024-07-12 16:37:18,760 superfastpath.py [line:288] one_slot INFO AVG TPS: 65139, delay: 0.193424 
+2024-07-12 16:37:18,760 superfastpath.py [line:295] one_slot INFO Leaving slot 4 
+2024-07-12 16:37:18,760 superfastpath.py [line:225] one_slot INFO Entering slot 5 
+2024-07-12 16:37:18,834 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 4 has delay, TPS and TXs: 0.1297776699066162, 10000 
+2024-07-12 16:37:18,834 superfastpath.py [line:288] one_slot INFO AVG TPS: 74746, delay: 0.177513 
+2024-07-12 16:37:18,835 superfastpath.py [line:295] one_slot INFO Leaving slot 5 
+2024-07-12 16:37:18,835 superfastpath.py [line:225] one_slot INFO Entering slot 6 
+2024-07-12 16:37:18,908 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 5 has delay, TPS and TXs: 0.13262319564819336, 10000 
+2024-07-12 16:37:18,908 superfastpath.py [line:288] one_slot INFO AVG TPS: 82177, delay: 0.168535 
+2024-07-12 16:37:18,908 superfastpath.py [line:295] one_slot INFO Leaving slot 6 
+2024-07-12 16:37:18,908 superfastpath.py [line:225] one_slot INFO Entering slot 7 
+2024-07-12 16:37:18,979 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 6 has delay, TPS and TXs: 0.1308271884918213, 10000 
+2024-07-12 16:37:18,979 superfastpath.py [line:288] one_slot INFO AVG TPS: 88257, delay: 0.162250 
+2024-07-12 16:37:18,979 superfastpath.py [line:295] one_slot INFO Leaving slot 7 
+2024-07-12 16:37:18,979 superfastpath.py [line:225] one_slot INFO Entering slot 8 
+2024-07-12 16:37:19,048 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 7 has delay, TPS and TXs: 0.12592053413391113, 10000 
+2024-07-12 16:37:19,048 superfastpath.py [line:288] one_slot INFO AVG TPS: 93441, delay: 0.157060 
+2024-07-12 16:37:19,049 superfastpath.py [line:295] one_slot INFO Leaving slot 8 
+2024-07-12 16:37:19,049 superfastpath.py [line:225] one_slot INFO Entering slot 9 
+2024-07-12 16:37:19,136 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 8 has delay, TPS and TXs: 0.14652514457702637, 10000 
+2024-07-12 16:37:19,136 superfastpath.py [line:288] one_slot INFO AVG TPS: 95596, delay: 0.155743 
+2024-07-12 16:37:19,136 superfastpath.py [line:295] one_slot INFO Leaving slot 9 
+2024-07-12 16:37:19,137 superfastpath.py [line:225] one_slot INFO Entering slot 10 
+2024-07-12 16:37:19,197 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 9 has delay, TPS and TXs: 0.13931560516357422, 10000 
+2024-07-12 16:37:19,197 superfastpath.py [line:288] one_slot INFO AVG TPS: 100273, delay: 0.153918 
+2024-07-12 16:37:19,197 superfastpath.py [line:295] one_slot INFO Leaving slot 10 
+2024-07-12 16:37:19,197 superfastpath.py [line:225] one_slot INFO Entering slot 11 
+2024-07-12 16:37:19,227 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 10 has delay, TPS and TXs: 0.08133530616760254, 10000 
+2024-07-12 16:37:19,227 superfastpath.py [line:288] one_slot INFO AVG TPS: 107769, delay: 0.146660 
+2024-07-12 16:37:19,227 superfastpath.py [line:295] one_slot INFO Leaving slot 11 
+2024-07-12 16:37:19,227 superfastpath.py [line:359] sufastpath INFO Leaves fastpath at 12 slot 
+2024-07-12 16:37:19,228 Superfast.py [line:308] wait_for_fastpath INFO Fastpath of epoch 0 completed 
+2024-07-12 16:37:19,228 Superfast.py [line:336] _run_epoch INFO Fastpath tps: 107555 
+2024-07-12 16:39:03,720 sufp_node.py [line:79] run INFO node 1's starts to run consensus on process id 28185 
+2024-07-12 16:39:03,721 sufp_node.py [line:80] run INFO parameters: N=4, f=1, S=10, T=1, fast-batch=10000, acs-batch=250, K=1, O=0 
+2024-07-12 16:39:03,721 sufp_node.py [line:62] prepare_bootstrap INFO node id 1 is inserting dummy payload TXs 
+2024-07-12 16:39:03,722 sufp_node.py [line:70] prepare_bootstrap INFO node id 1 just inserts 50000 TXs 
+2024-07-12 16:39:03,722 sufp_node.py [line:70] prepare_bootstrap INFO node id 1 just inserts 50000 TXs 
+2024-07-12 16:39:03,723 sufp_node.py [line:74] prepare_bootstrap INFO node id 1 completed the loading of dummy TXs 
+2024-07-12 16:39:03,723 Superfast.py [line:178] run_bft INFO Node 1 starts to run at time:1720773543.7233043 
+2024-07-12 16:39:03,723 Superfast.py [line:231] _run_epoch INFO Node enters epoch 0 
+2024-07-12 16:39:03,725 superfastpath.py [line:43] sufastpath INFO Entering fast path 
+2024-07-12 16:39:03,725 superfastpath.py [line:225] one_slot INFO Entering slot 1 
+2024-07-12 16:39:03,842 superfastpath.py [line:295] one_slot INFO Leaving slot 1 
+2024-07-12 16:39:03,842 superfastpath.py [line:225] one_slot INFO Entering slot 2 
+2024-07-12 16:39:03,939 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 1 has delay, TPS and TXs: 0.19894719123840332, 10000 
+2024-07-12 16:39:03,940 superfastpath.py [line:288] one_slot INFO AVG TPS: 46571, delay: 0.198947 
+2024-07-12 16:39:03,940 superfastpath.py [line:295] one_slot INFO Leaving slot 2 
+2024-07-12 16:39:03,940 superfastpath.py [line:225] one_slot INFO Entering slot 3 
+2024-07-12 16:39:04,005 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 2 has delay, TPS and TXs: 0.14864611625671387, 10000 
+2024-07-12 16:39:04,006 superfastpath.py [line:288] one_slot INFO AVG TPS: 71283, delay: 0.173797 
+2024-07-12 16:39:04,006 superfastpath.py [line:295] one_slot INFO Leaving slot 3 
+2024-07-12 16:39:04,006 superfastpath.py [line:225] one_slot INFO Entering slot 4 
+2024-07-12 16:39:04,058 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 3 has delay, TPS and TXs: 0.10481858253479004, 10000 
+2024-07-12 16:39:04,058 superfastpath.py [line:288] one_slot INFO AVG TPS: 90061, delay: 0.150804 
+2024-07-12 16:39:04,058 superfastpath.py [line:295] one_slot INFO Leaving slot 4 
+2024-07-12 16:39:04,058 superfastpath.py [line:225] one_slot INFO Entering slot 5 
+2024-07-12 16:39:04,133 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 4 has delay, TPS and TXs: 0.11253643035888672, 10000 
+2024-07-12 16:39:04,133 superfastpath.py [line:288] one_slot INFO AVG TPS: 98077, delay: 0.141237 
+2024-07-12 16:39:04,133 superfastpath.py [line:295] one_slot INFO Leaving slot 5 
+2024-07-12 16:39:04,133 superfastpath.py [line:225] one_slot INFO Entering slot 6 
+2024-07-12 16:39:04,196 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 5 has delay, TPS and TXs: 0.1282949447631836, 10000 
+2024-07-12 16:39:04,196 superfastpath.py [line:288] one_slot INFO AVG TPS: 106115, delay: 0.138649 
+2024-07-12 16:39:04,197 superfastpath.py [line:295] one_slot INFO Leaving slot 6 
+2024-07-12 16:39:04,197 superfastpath.py [line:225] one_slot INFO Entering slot 7 
+2024-07-12 16:39:04,271 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 6 has delay, TPS and TXs: 0.1256556510925293, 10000 
+2024-07-12 16:39:04,271 superfastpath.py [line:288] one_slot INFO AVG TPS: 109931, delay: 0.136483 
+2024-07-12 16:39:04,271 superfastpath.py [line:295] one_slot INFO Leaving slot 7 
+2024-07-12 16:39:04,271 superfastpath.py [line:225] one_slot INFO Entering slot 8 
+2024-07-12 16:39:04,327 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 7 has delay, TPS and TXs: 0.12070703506469727, 10000 
+2024-07-12 16:39:04,327 superfastpath.py [line:288] one_slot INFO AVG TPS: 116234, delay: 0.134229 
+2024-07-12 16:39:04,327 superfastpath.py [line:295] one_slot INFO Leaving slot 8 
+2024-07-12 16:39:04,327 superfastpath.py [line:225] one_slot INFO Entering slot 9 
+2024-07-12 16:39:04,416 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 8 has delay, TPS and TXs: 0.12984919548034668, 10000 
+2024-07-12 16:39:04,417 superfastpath.py [line:288] one_slot INFO AVG TPS: 115631, delay: 0.133682 
+2024-07-12 16:39:04,418 superfastpath.py [line:295] one_slot INFO Leaving slot 9 
+2024-07-12 16:39:04,418 superfastpath.py [line:225] one_slot INFO Entering slot 10 
+2024-07-12 16:39:04,476 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 9 has delay, TPS and TXs: 0.13443994522094727, 10000 
+2024-07-12 16:39:04,477 superfastpath.py [line:288] one_slot INFO AVG TPS: 119739, delay: 0.133766 
+2024-07-12 16:39:04,477 superfastpath.py [line:295] one_slot INFO Leaving slot 10 
+2024-07-12 16:39:04,477 superfastpath.py [line:225] one_slot INFO Entering slot 11 
+2024-07-12 16:39:04,491 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 10 has delay, TPS and TXs: 0.0592653751373291, 10000 
+2024-07-12 16:39:04,491 superfastpath.py [line:288] one_slot INFO AVG TPS: 130561, delay: 0.126316 
+2024-07-12 16:39:04,491 superfastpath.py [line:295] one_slot INFO Leaving slot 11 
+2024-07-12 16:39:04,491 superfastpath.py [line:359] sufastpath INFO Leaves fastpath at 12 slot 
+2024-07-12 16:39:04,491 Superfast.py [line:308] wait_for_fastpath INFO Fastpath of epoch 0 completed 
+2024-07-12 16:39:04,491 Superfast.py [line:336] _run_epoch INFO Fastpath tps: 130174 
+2024-07-12 16:42:15,079 sufp_node.py [line:79] run INFO node 1's starts to run consensus on process id 28279 
+2024-07-12 16:42:15,080 sufp_node.py [line:80] run INFO parameters: N=4, f=1, S=10, T=1, fast-batch=10000, acs-batch=250, K=1, O=0 
+2024-07-12 16:42:15,080 sufp_node.py [line:62] prepare_bootstrap INFO node id 1 is inserting dummy payload TXs 
+2024-07-12 16:42:15,081 sufp_node.py [line:70] prepare_bootstrap INFO node id 1 just inserts 50000 TXs 
+2024-07-12 16:42:15,082 sufp_node.py [line:70] prepare_bootstrap INFO node id 1 just inserts 50000 TXs 
+2024-07-12 16:42:15,082 sufp_node.py [line:74] prepare_bootstrap INFO node id 1 completed the loading of dummy TXs 
+2024-07-12 16:42:15,082 Superfast.py [line:178] run_bft INFO Node 1 starts to run at time:1720773735.0826378 
+2024-07-12 16:42:15,083 Superfast.py [line:231] _run_epoch INFO Node enters epoch 0 
+2024-07-12 16:42:15,084 superfastpath.py [line:43] sufastpath INFO Entering fast path 
+2024-07-12 16:42:15,085 superfastpath.py [line:225] one_slot INFO Entering slot 1 
+2024-07-12 16:42:15,210 superfastpath.py [line:295] one_slot INFO Leaving slot 1 
+2024-07-12 16:42:15,211 superfastpath.py [line:225] one_slot INFO Entering slot 2 
+2024-07-12 16:42:15,285 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 1 has delay, TPS and TXs: 0.1904888153076172, 10000 
+2024-07-12 16:42:15,286 superfastpath.py [line:288] one_slot INFO AVG TPS: 49845, delay: 0.190489 
+2024-07-12 16:42:15,286 superfastpath.py [line:295] one_slot INFO Leaving slot 2 
+2024-07-12 16:42:15,286 superfastpath.py [line:225] one_slot INFO Entering slot 3 
+2024-07-12 16:42:15,353 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 2 has delay, TPS and TXs: 0.13116908073425293, 10000 
+2024-07-12 16:42:15,353 superfastpath.py [line:288] one_slot INFO AVG TPS: 74527, delay: 0.160829 
+2024-07-12 16:42:15,353 superfastpath.py [line:295] one_slot INFO Leaving slot 3 
+2024-07-12 16:42:15,354 superfastpath.py [line:225] one_slot INFO Entering slot 4 
+2024-07-12 16:42:15,412 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 3 has delay, TPS and TXs: 0.11687564849853516, 10000 
+2024-07-12 16:42:15,412 superfastpath.py [line:288] one_slot INFO AVG TPS: 91807, delay: 0.146178 
+2024-07-12 16:42:15,412 superfastpath.py [line:295] one_slot INFO Leaving slot 4 
+2024-07-12 16:42:15,412 superfastpath.py [line:225] one_slot INFO Entering slot 5 
+2024-07-12 16:42:15,483 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 4 has delay, TPS and TXs: 0.11948895454406738, 10000 
+2024-07-12 16:42:15,484 superfastpath.py [line:288] one_slot INFO AVG TPS: 100312, delay: 0.139506 
+2024-07-12 16:42:15,484 superfastpath.py [line:295] one_slot INFO Leaving slot 5 
+2024-07-12 16:42:15,484 superfastpath.py [line:225] one_slot INFO Entering slot 6 
+2024-07-12 16:42:15,545 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 5 has delay, TPS and TXs: 0.12443423271179199, 10000 
+2024-07-12 16:42:15,545 superfastpath.py [line:288] one_slot INFO AVG TPS: 108662, delay: 0.136491 
+2024-07-12 16:42:15,545 superfastpath.py [line:295] one_slot INFO Leaving slot 6 
+2024-07-12 16:42:15,545 superfastpath.py [line:225] one_slot INFO Entering slot 7 
+2024-07-12 16:42:15,611 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 6 has delay, TPS and TXs: 0.11801028251647949, 10000 
+2024-07-12 16:42:15,611 superfastpath.py [line:288] one_slot INFO AVG TPS: 114077, delay: 0.133411 
+2024-07-12 16:42:15,611 superfastpath.py [line:295] one_slot INFO Leaving slot 7 
+2024-07-12 16:42:15,611 superfastpath.py [line:225] one_slot INFO Entering slot 8 
+2024-07-12 16:42:15,668 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 7 has delay, TPS and TXs: 0.11355066299438477, 10000 
+2024-07-12 16:42:15,668 superfastpath.py [line:288] one_slot INFO AVG TPS: 119985, delay: 0.130574 
+2024-07-12 16:42:15,668 superfastpath.py [line:295] one_slot INFO Leaving slot 8 
+2024-07-12 16:42:15,668 superfastpath.py [line:225] one_slot INFO Entering slot 9 
+2024-07-12 16:42:15,734 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 8 has delay, TPS and TXs: 0.11215448379516602, 10000 
+2024-07-12 16:42:15,734 superfastpath.py [line:288] one_slot INFO AVG TPS: 123280, delay: 0.128272 
+2024-07-12 16:42:15,734 superfastpath.py [line:295] one_slot INFO Leaving slot 9 
+2024-07-12 16:42:15,734 superfastpath.py [line:225] one_slot INFO Entering slot 10 
+2024-07-12 16:42:15,821 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 9 has delay, TPS and TXs: 0.13562726974487305, 10000 
+2024-07-12 16:42:15,821 superfastpath.py [line:288] one_slot INFO AVG TPS: 122260, delay: 0.129089 
+2024-07-12 16:42:15,821 superfastpath.py [line:295] one_slot INFO Leaving slot 10 
+2024-07-12 16:42:15,821 superfastpath.py [line:225] one_slot INFO Entering slot 11 
+2024-07-12 16:42:15,835 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 10 has delay, TPS and TXs: 0.08767843246459961, 10000 
+2024-07-12 16:42:15,835 superfastpath.py [line:288] one_slot INFO AVG TPS: 133337, delay: 0.124948 
+2024-07-12 16:42:15,835 superfastpath.py [line:295] one_slot INFO Leaving slot 11 
+2024-07-12 16:42:15,835 superfastpath.py [line:359] sufastpath INFO Leaves fastpath at 12 slot 
+2024-07-12 16:42:15,835 Superfast.py [line:308] wait_for_fastpath INFO Fastpath of epoch 0 completed 
+2024-07-12 16:42:15,835 Superfast.py [line:336] _run_epoch INFO Fastpath tps: 132872 
+2024-07-12 16:45:20,481 sufp_node.py [line:79] run INFO node 1's starts to run consensus on process id 28395 
+2024-07-12 16:45:20,482 sufp_node.py [line:80] run INFO parameters: N=4, f=1, S=10, T=1, fast-batch=10000, acs-batch=250, K=1, O=0 
+2024-07-12 16:45:20,482 sufp_node.py [line:62] prepare_bootstrap INFO node id 1 is inserting dummy payload TXs 
+2024-07-12 16:45:20,483 sufp_node.py [line:70] prepare_bootstrap INFO node id 1 just inserts 50000 TXs 
+2024-07-12 16:45:20,484 sufp_node.py [line:70] prepare_bootstrap INFO node id 1 just inserts 50000 TXs 
+2024-07-12 16:45:20,484 sufp_node.py [line:74] prepare_bootstrap INFO node id 1 completed the loading of dummy TXs 
+2024-07-12 16:45:20,484 Superfast.py [line:178] run_bft INFO Node 1 starts to run at time:1720773920.4846752 
+2024-07-12 16:45:20,484 Superfast.py [line:231] _run_epoch INFO Node enters epoch 0 
+2024-07-12 16:45:20,486 superfastpath.py [line:43] sufastpath INFO Entering fast path 
+2024-07-12 16:45:20,487 superfastpath.py [line:225] one_slot INFO Entering slot 1 
+2024-07-12 16:45:20,731 superfastpath.py [line:295] one_slot INFO Leaving slot 1 
+2024-07-12 16:45:20,731 superfastpath.py [line:225] one_slot INFO Entering slot 2 
+2024-07-12 16:45:20,832 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 1 has delay, TPS and TXs: 0.32790637016296387, 10000 
+2024-07-12 16:45:20,832 superfastpath.py [line:288] one_slot INFO AVG TPS: 28927, delay: 0.327906 
+2024-07-12 16:45:20,832 superfastpath.py [line:295] one_slot INFO Leaving slot 2 
+2024-07-12 16:45:20,833 superfastpath.py [line:225] one_slot INFO Entering slot 3 
+2024-07-12 16:45:20,905 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 2 has delay, TPS and TXs: 0.1596059799194336, 10000 
+2024-07-12 16:45:20,905 superfastpath.py [line:288] one_slot INFO AVG TPS: 47777, delay: 0.243756 
+2024-07-12 16:45:20,905 superfastpath.py [line:295] one_slot INFO Leaving slot 3 
+2024-07-12 16:45:20,905 superfastpath.py [line:225] one_slot INFO Entering slot 4 
+2024-07-12 16:45:20,966 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 3 has delay, TPS and TXs: 0.12360310554504395, 10000 
+2024-07-12 16:45:20,966 superfastpath.py [line:288] one_slot INFO AVG TPS: 62539, delay: 0.203705 
+2024-07-12 16:45:20,966 superfastpath.py [line:295] one_slot INFO Leaving slot 4 
+2024-07-12 16:45:20,966 superfastpath.py [line:225] one_slot INFO Entering slot 5 
+2024-07-12 16:45:21,038 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 4 has delay, TPS and TXs: 0.12291836738586426, 10000 
+2024-07-12 16:45:21,038 superfastpath.py [line:288] one_slot INFO AVG TPS: 72556, delay: 0.183508 
+2024-07-12 16:45:21,038 superfastpath.py [line:295] one_slot INFO Leaving slot 5 
+2024-07-12 16:45:21,038 superfastpath.py [line:225] one_slot INFO Entering slot 6 
+2024-07-12 16:45:21,104 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 5 has delay, TPS and TXs: 0.12880778312683105, 10000 
+2024-07-12 16:45:21,104 superfastpath.py [line:288] one_slot INFO AVG TPS: 80986, delay: 0.172568 
+2024-07-12 16:45:21,104 superfastpath.py [line:295] one_slot INFO Leaving slot 6 
+2024-07-12 16:45:21,105 superfastpath.py [line:225] one_slot INFO Entering slot 7 
+2024-07-12 16:45:21,172 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 6 has delay, TPS and TXs: 0.12411093711853027, 10000 
+2024-07-12 16:45:21,172 superfastpath.py [line:288] one_slot INFO AVG TPS: 87582, delay: 0.164492 
+2024-07-12 16:45:21,172 superfastpath.py [line:295] one_slot INFO Leaving slot 7 
+2024-07-12 16:45:21,172 superfastpath.py [line:225] one_slot INFO Entering slot 8 
+2024-07-12 16:45:21,247 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 7 has delay, TPS and TXs: 0.13306570053100586, 10000 
+2024-07-12 16:45:21,247 superfastpath.py [line:288] one_slot INFO AVG TPS: 92028, delay: 0.160003 
+2024-07-12 16:45:21,247 superfastpath.py [line:295] one_slot INFO Leaving slot 8 
+2024-07-12 16:45:21,247 superfastpath.py [line:225] one_slot INFO Entering slot 9 
+2024-07-12 16:45:21,322 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 8 has delay, TPS and TXs: 0.14118647575378418, 10000 
+2024-07-12 16:45:21,322 superfastpath.py [line:288] one_slot INFO AVG TPS: 95741, delay: 0.157651 
+2024-07-12 16:45:21,322 superfastpath.py [line:295] one_slot INFO Leaving slot 9 
+2024-07-12 16:45:21,322 superfastpath.py [line:225] one_slot INFO Entering slot 10 
+2024-07-12 16:45:21,386 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 9 has delay, TPS and TXs: 0.12909555435180664, 10000 
+2024-07-12 16:45:21,386 superfastpath.py [line:288] one_slot INFO AVG TPS: 100101, delay: 0.154478 
+2024-07-12 16:45:21,386 superfastpath.py [line:295] one_slot INFO Leaving slot 10 
+2024-07-12 16:45:21,386 superfastpath.py [line:225] one_slot INFO Entering slot 11 
+2024-07-12 16:45:21,397 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 10 has delay, TPS and TXs: 0.06407284736633301, 10000 
+2024-07-12 16:45:21,397 superfastpath.py [line:288] one_slot INFO AVG TPS: 109811, delay: 0.145437 
+2024-07-12 16:45:21,398 superfastpath.py [line:295] one_slot INFO Leaving slot 11 
+2024-07-12 16:45:21,398 superfastpath.py [line:359] sufastpath INFO Leaves fastpath at 12 slot 
+2024-07-12 16:45:21,398 Superfast.py [line:308] wait_for_fastpath INFO Fastpath of epoch 0 completed 
+2024-07-12 16:45:21,398 Superfast.py [line:336] _run_epoch INFO Fastpath tps: 109461 
+2024-07-12 16:45:26,399 Superfast.py [line:208] run_bft INFO node 1 breaks in 5.915200 seconds in epoch 0 with total delivered Txs 100000 and average delay 0.145437 
+2024-07-12 16:53:47,756 sufp_node.py [line:79] run INFO node 1's starts to run consensus on process id 28566 
+2024-07-12 16:53:47,756 sufp_node.py [line:80] run INFO parameters: N=16, f=5, S=10, T=1, fast-batch=10000, acs-batch=62, K=1, O=0 
+2024-07-12 16:53:47,757 sufp_node.py [line:62] prepare_bootstrap INFO node id 1 is inserting dummy payload TXs 
+2024-07-12 16:53:47,758 sufp_node.py [line:70] prepare_bootstrap INFO node id 1 just inserts 50000 TXs 
+2024-07-12 16:53:47,758 sufp_node.py [line:70] prepare_bootstrap INFO node id 1 just inserts 50000 TXs 
+2024-07-12 16:53:47,759 sufp_node.py [line:74] prepare_bootstrap INFO node id 1 completed the loading of dummy TXs 
+2024-07-12 16:53:47,759 Superfast.py [line:178] run_bft INFO Node 1 starts to run at time:1720774427.7594264 
+2024-07-12 16:53:47,759 Superfast.py [line:231] _run_epoch INFO Node enters epoch 0 
+2024-07-12 16:53:47,761 superfastpath.py [line:43] sufastpath INFO Entering fast path 
+2024-07-12 16:53:47,762 superfastpath.py [line:225] one_slot INFO Entering slot 1 
+2024-07-12 16:53:47,933 superfastpath.py [line:295] one_slot INFO Leaving slot 1 
+2024-07-12 16:53:47,934 superfastpath.py [line:225] one_slot INFO Entering slot 2 
+2024-07-12 16:53:48,485 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 1 has delay, TPS and TXs: 0.6884503364562988, 10000 
+2024-07-12 16:53:48,486 superfastpath.py [line:288] one_slot INFO AVG TPS: 13801, delay: 0.688450 
+2024-07-12 16:53:48,486 superfastpath.py [line:295] one_slot INFO Leaving slot 2 
+2024-07-12 16:53:48,486 superfastpath.py [line:225] one_slot INFO Entering slot 3 
+2024-07-12 16:53:48,969 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 2 has delay, TPS and TXs: 1.0098869800567627, 10000 
+2024-07-12 16:53:48,969 superfastpath.py [line:288] one_slot INFO AVG TPS: 16555, delay: 0.849169 
+2024-07-12 16:53:48,970 superfastpath.py [line:295] one_slot INFO Leaving slot 3 
+2024-07-12 16:53:48,970 superfastpath.py [line:225] one_slot INFO Entering slot 4 
+2024-07-12 16:53:49,131 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 3 has delay, TPS and TXs: 0.6162536144256592, 10000 
+2024-07-12 16:53:49,132 superfastpath.py [line:288] one_slot INFO AVG TPS: 21896, delay: 0.771530 
+2024-07-12 16:53:49,132 superfastpath.py [line:295] one_slot INFO Leaving slot 4 
+2024-07-12 16:53:49,132 superfastpath.py [line:225] one_slot INFO Entering slot 5 
+2024-07-12 16:53:49,622 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 4 has delay, TPS and TXs: 0.63399338722229, 10000 
+2024-07-12 16:53:49,623 superfastpath.py [line:288] one_slot INFO AVG TPS: 21489, delay: 0.737146 
+2024-07-12 16:53:49,623 superfastpath.py [line:295] one_slot INFO Leaving slot 5 
+2024-07-12 16:53:49,623 superfastpath.py [line:225] one_slot INFO Entering slot 6 
+2024-07-12 16:53:49,940 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 5 has delay, TPS and TXs: 0.7796339988708496, 10000 
+2024-07-12 16:53:49,941 superfastpath.py [line:288] one_slot INFO AVG TPS: 22942, delay: 0.745644 
+2024-07-12 16:53:49,941 superfastpath.py [line:295] one_slot INFO Leaving slot 6 
+2024-07-12 16:53:49,941 superfastpath.py [line:225] one_slot INFO Entering slot 7 
+2024-07-12 16:53:50,554 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 6 has delay, TPS and TXs: 0.8767099380493164, 10000 
+2024-07-12 16:53:50,554 superfastpath.py [line:288] one_slot INFO AVG TPS: 21487, delay: 0.767488 
+2024-07-12 16:53:50,554 superfastpath.py [line:295] one_slot INFO Leaving slot 7 
+2024-07-12 16:53:50,555 superfastpath.py [line:225] one_slot INFO Entering slot 8 
+2024-07-12 16:53:50,693 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 7 has delay, TPS and TXs: 0.7325131893157959, 10000 
+2024-07-12 16:53:50,693 superfastpath.py [line:288] one_slot INFO AVG TPS: 23880, delay: 0.762492 
+2024-07-12 16:53:50,693 superfastpath.py [line:295] one_slot INFO Leaving slot 8 
+2024-07-12 16:53:50,693 superfastpath.py [line:225] one_slot INFO Entering slot 9 
+2024-07-12 16:53:51,106 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 8 has delay, TPS and TXs: 0.5015051364898682, 10000 
+2024-07-12 16:53:51,106 superfastpath.py [line:288] one_slot INFO AVG TPS: 23918, delay: 0.729868 
+2024-07-12 16:53:51,107 superfastpath.py [line:295] one_slot INFO Leaving slot 9 
+2024-07-12 16:53:51,107 superfastpath.py [line:225] one_slot INFO Entering slot 10 
+2024-07-12 16:53:51,341 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 9 has delay, TPS and TXs: 0.6043479442596436, 10000 
+2024-07-12 16:53:51,341 superfastpath.py [line:288] one_slot INFO AVG TPS: 25140, delay: 0.715922 
+2024-07-12 16:53:51,341 superfastpath.py [line:295] one_slot INFO Leaving slot 10 
+2024-07-12 16:53:51,341 superfastpath.py [line:225] one_slot INFO Entering slot 11 
+2024-07-12 16:53:51,471 superfastpath.py [line:286] one_slot INFO Fast block at Node 1 for Epoch sidAFAST0 and Slot 10 has delay, TPS and TXs: 0.2990260124206543, 10000 
+2024-07-12 16:53:51,471 superfastpath.py [line:288] one_slot INFO AVG TPS: 26958, delay: 0.674232 
+2024-07-12 16:53:51,471 superfastpath.py [line:295] one_slot INFO Leaving slot 11 
+2024-07-12 16:53:51,471 superfastpath.py [line:359] sufastpath INFO Leaves fastpath at 12 slot 
+2024-07-12 16:53:51,471 Superfast.py [line:308] wait_for_fastpath INFO Fastpath of epoch 0 completed 
+2024-07-12 16:53:51,472 Superfast.py [line:336] _run_epoch INFO Fastpath tps: 26939 
+2024-07-12 16:53:56,472 Superfast.py [line:208] run_bft INFO node 1 breaks in 8.712777 seconds in epoch 0 with total delivered Txs 100000 and average delay 0.674232 

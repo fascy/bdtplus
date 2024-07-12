@@ -1,0 +1,36 @@
+2022-07-13 04:05:35,257 socket_client_ng.py [line:156] run INFO node id 8 is running on pid 5139 
+2022-07-13 04:05:35,257 socket_client_ng.py [line:47] _connect_and_send_forever INFO node 8's socket client starts to make outgoing connections on process id 5139 
+2022-07-13 04:05:35,257 socket_client_ng.py [line:66] _connect INFO node 8's socket client starts to make outgoing connections to node 0 server 
+2022-07-13 04:05:35,288 socket_client_ng.py [line:74] _connect INFO node 8's socket client made an outgoing connection to node 0 server 
+2022-07-13 04:05:35,288 socket_client_ng.py [line:66] _connect INFO node 8's socket client starts to make outgoing connections to node 1 server 
+2022-07-13 04:05:35,288 socket_client_ng.py [line:74] _connect INFO node 8's socket client made an outgoing connection to node 1 server 
+2022-07-13 04:05:35,288 socket_client_ng.py [line:66] _connect INFO node 8's socket client starts to make outgoing connections to node 2 server 
+2022-07-13 04:05:35,289 socket_client_ng.py [line:74] _connect INFO node 8's socket client made an outgoing connection to node 2 server 
+2022-07-13 04:05:35,289 socket_client_ng.py [line:66] _connect INFO node 8's socket client starts to make outgoing connections to node 3 server 
+2022-07-13 04:05:35,289 socket_client_ng.py [line:74] _connect INFO node 8's socket client made an outgoing connection to node 3 server 
+2022-07-13 04:05:35,289 socket_client_ng.py [line:66] _connect INFO node 8's socket client starts to make outgoing connections to node 4 server 
+2022-07-13 04:05:35,290 socket_client_ng.py [line:74] _connect INFO node 8's socket client made an outgoing connection to node 4 server 
+2022-07-13 04:05:35,290 socket_client_ng.py [line:66] _connect INFO node 8's socket client starts to make outgoing connections to node 5 server 
+2022-07-13 04:05:35,290 socket_client_ng.py [line:74] _connect INFO node 8's socket client made an outgoing connection to node 5 server 
+2022-07-13 04:05:35,290 socket_client_ng.py [line:66] _connect INFO node 8's socket client starts to make outgoing connections to node 6 server 
+2022-07-13 04:05:35,291 socket_client_ng.py [line:74] _connect INFO node 8's socket client made an outgoing connection to node 6 server 
+2022-07-13 04:05:35,291 socket_client_ng.py [line:66] _connect INFO node 8's socket client starts to make outgoing connections to node 7 server 
+2022-07-13 04:05:35,291 socket_client_ng.py [line:74] _connect INFO node 8's socket client made an outgoing connection to node 7 server 
+2022-07-13 04:05:35,291 socket_client_ng.py [line:66] _connect INFO node 8's socket client starts to make outgoing connections to node 8 server 
+2022-07-13 04:05:35,291 socket_client_ng.py [line:74] _connect INFO node 8's socket client made an outgoing connection to node 8 server 
+2022-07-13 04:05:35,292 socket_client_ng.py [line:66] _connect INFO node 8's socket client starts to make outgoing connections to node 9 server 
+2022-07-13 04:05:35,292 socket_client_ng.py [line:74] _connect INFO node 8's socket client made an outgoing connection to node 9 server 
+2022-07-13 04:05:35,292 socket_client_ng.py [line:66] _connect INFO node 8's socket client starts to make outgoing connections to node 10 server 
+2022-07-13 04:05:35,292 socket_client_ng.py [line:74] _connect INFO node 8's socket client made an outgoing connection to node 10 server 
+2022-07-13 04:05:35,292 socket_client_ng.py [line:66] _connect INFO node 8's socket client starts to make outgoing connections to node 11 server 
+2022-07-13 04:05:35,293 socket_client_ng.py [line:74] _connect INFO node 8's socket client made an outgoing connection to node 11 server 
+2022-07-13 04:05:35,293 socket_client_ng.py [line:66] _connect INFO node 8's socket client starts to make outgoing connections to node 12 server 
+2022-07-13 04:05:35,293 socket_client_ng.py [line:74] _connect INFO node 8's socket client made an outgoing connection to node 12 server 
+2022-07-13 04:05:35,293 socket_client_ng.py [line:66] _connect INFO node 8's socket client starts to make outgoing connections to node 13 server 
+2022-07-13 04:05:35,294 socket_client_ng.py [line:74] _connect INFO node 8's socket client made an outgoing connection to node 13 server 
+2022-07-13 04:05:35,294 socket_client_ng.py [line:66] _connect INFO node 8's socket client starts to make outgoing connections to node 14 server 
+2022-07-13 04:05:35,294 socket_client_ng.py [line:74] _connect INFO node 8's socket client made an outgoing connection to node 14 server 
+2022-07-13 04:05:35,294 socket_client_ng.py [line:66] _connect INFO node 8's socket client starts to make outgoing connections to node 15 server 
+2022-07-13 04:05:35,295 socket_client_ng.py [line:74] _connect INFO node 8's socket client made an outgoing connection to node 15 server 
+2024-07-12 16:53:47,191 socket_client.py [line:157] run INFO node id 8 is running on pid 28767 
+2024-07-12 16:53:47,192 socket_client.py [line:44] _connect_and_send_forever INFO node 8's socket client starts to make outgoing connections on process id 28767 
