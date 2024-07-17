@@ -306,7 +306,7 @@ class SUFP():
             vc_ready.set()
             if self.logger != None:
                 self.logger.info('Fastpath of epoch %d completed' % e)
-            (txcnt, _) = suoutput[1]
+            (txcnt, tps, weighted_delay) = suoutput[1]
 
 
         gevent.spawn(wait_for_fastpath)
@@ -327,17 +327,18 @@ class SUFP():
             #notarization = fast_thread.get(block=False)
             if notarization is not None:
                 assert fixed_block is not None
-                (epoch_txcnt, weighted_delay) = suoutput[1]
-                e_time = time.time()
-                self.txdelay = (self.txcnt * self.txdelay + epoch_txcnt * weighted_delay) / (self.txcnt + epoch_txcnt)
-                self.txcnt += epoch_txcnt
-                tps = int(epoch_txcnt) / (e_time - s_etime)
+                # (epoch_txcnt, weighted_delay) = suoutput[1]
+                # e_time = time.time()
+                # self.txdelay = (self.txcnt * self.txdelay + epoch_txcnt * weighted_delay) / (self.txcnt + epoch_txcnt)
+                # self.txcnt += epoch_txcnt
+                # tps = int(epoch_txcnt) / (e_time - s_etime)
+                (txcnt, tps, weighted_delay) = suoutput[1]
                 if self.logger:
                     self.logger.info('Fastpath tps: %d' % tps)
 
                 #assert hash(notarized_block_header) == notarized_block_hash
 
-                send(0, ('VIEW_CHANGE', (self.txcnt, self.txdelay, tps)))
+                send(0, ('VIEW_CHANGE', (txcnt, weighted_delay, tps)))
             # else:
             #     notarized_block_header = None
             #     o = (notarized_block_header, None)

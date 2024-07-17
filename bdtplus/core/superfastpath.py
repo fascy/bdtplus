@@ -78,7 +78,7 @@ def sufastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
     epoch_txcnt = 0
     weighted_delay = 0
 
-
+    weighted_tps = 0
 
     def handle_messages():
         nonlocal leader, hash_prev, pending_block, notraized_block, fixed_block, voters, votes, slot_cur
@@ -217,7 +217,7 @@ def sufastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
     """
 
     def one_slot():
-        nonlocal pending_block, notraized_block, fixed_block, hash_prev, slot_cur, epoch_txcnt, delay, e_times, s_times, txcnt, weighted_delay
+        nonlocal pending_block, notraized_block, fixed_block, hash_prev, slot_cur, epoch_txcnt, delay, e_times, s_times, txcnt, weighted_delay, weighted_tps
 
         #print('3')
 
@@ -272,8 +272,7 @@ def sufastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
         hash_prev = hash(pending_block_header)
         print(pid, "pending:", slot_cur, hash_prev)
         # assert notraized_block[1] + 1 == slot_cur
-
-        if fixed_block is not None:
+        if fixed_block is not None and fixed_block[1] >= 5:
             e_times[fixed_block[1]] = time.time()
             delay[fixed_block[1]] = e_times[fixed_block[1]] - s_times[fixed_block[1]]
             print(slot_cur,"running time\t\t", delay[fixed_block[1]])
@@ -283,13 +282,13 @@ def sufastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
             epoch_txcnt += txcnt[fixed_block[1]]
 
             if logger is not None:
-                logger.info('Fast block at Node %d for Epoch %s and Slot %d has delay, TPS and TXs: %s, %d' % (pid, sid, fixed_block[1], str(delay[fixed_block[1]]), txcnt[fixed_block[1]]))
+                logger.info('Fast block at Node %d for Epoch %s and Slot %d has delay, TPS and TXs: %s, %d' % (pid, sid, fixed_block[1], str(delay[fixed_block[1]]), epoch_txcnt))
             if logger:
-                logger.info('AVG TPS: %d, delay: %f' % (epoch_txcnt/(time.time()-start_time), weighted_delay))
+                logger.info('AVG TPS: %d, running time %f, weighted delay: %f' % (epoch_txcnt/(time.time()-start_time), time.time()-start_time, weighted_delay))
 
-        if output_notraized_block is not None:
-            output_notraized_block((fixed_block, (epoch_txcnt, weighted_delay)))
-
+            if output_notraized_block is not None:
+                output_notraized_block((fixed_block, (epoch_txcnt, weighted_delay)))
+            weighted_tps = epoch_txcnt/(time.time()-start_time)
 
         if logger is not None:
             logger.info("Leaving slot %d" % slot_cur)
@@ -309,9 +308,10 @@ def sufastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
 
     recv_thread = gevent.spawn(handle_messages)
     #gevent.sleep(0)
-    start_time = time.time()
-    while slot_cur <= SLOTS_NUM + 1:
 
+    while slot_cur <= SLOTS_NUM + 1:
+        if slot_cur == 5:
+            start_time = time.time()
         #if logger is not None:
         #    logger.info("Enter fastpath's slot %d out of all %d slots" % (slot_cur, SLOTS_NUM))
 
@@ -362,7 +362,7 @@ def sufastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
         sigs = ecdsa_sign(SK2, hash_prev)
         sigsp = ecdsa_sign(SK2, pending_block[2])
 
-        return (slot_cur, sigs, sigsp), (epoch_txcnt, weighted_delay)  # represents fast_path successes
+        return (slot_cur, sigs, sigsp), (epoch_txcnt, weighted_tps, weighted_delay)  # represents fast_path successes
     else:
         sigs = ecdsa_sign(SK2, hash_prev)
-        return (slot_cur, sigs, 0), (epoch_txcnt, weighted_delay)
+        return (slot_cur, sigs, 0), (epoch_txcnt, weighted_tps, weighted_delay)
