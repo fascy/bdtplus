@@ -272,7 +272,7 @@ def sufastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
         hash_prev = hash(pending_block_header)
         print(pid, "pending:", slot_cur, hash_prev)
         # assert notraized_block[1] + 1 == slot_cur
-        if fixed_block is not None and fixed_block[1] >= 5:
+        if fixed_block is not None and fixed_block[1] >= 8:
             e_times[fixed_block[1]] = time.time()
             delay[fixed_block[1]] = e_times[fixed_block[1]] - s_times[fixed_block[1]]
             print(slot_cur,"running time\t\t", delay[fixed_block[1]])
@@ -310,7 +310,7 @@ def sufastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
     #gevent.sleep(0)
 
     while slot_cur <= SLOTS_NUM + 1:
-        if slot_cur == 5:
+        if slot_cur == 8:
             start_time = time.time()
         #if logger is not None:
         #    logger.info("Enter fastpath's slot %d out of all %d slots" % (slot_cur, SLOTS_NUM))
