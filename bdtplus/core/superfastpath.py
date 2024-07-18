@@ -146,7 +146,7 @@ def sufastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
 
                     votes[slot_cur][sender] = sig_p
 
-                    if len(voters[slot_cur]) == N-1 and not decide_sent[slot_cur]:
+                    if len(voters[slot_cur]) == N-f and not decide_sent[slot_cur]:
                         #print(slot_cur)
                         Sigma = tuple(votes[slot_cur].items())
                         if slot_cur == SLOTS_NUM + 1:
@@ -179,14 +179,14 @@ def sufastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
                     continue
                 if slot_cur > 1:
                     try:
-                        assert len(Sigma_p) == N-1
+                        assert len(Sigma_p) == N-f
                     except AssertionError:
                         if logger is not None:
                             logger.info("No enough ecdsa signatures!")
                         print("No enough ecdsa signatures!")
                         msg_noncritical_signal.set()
                         continue
-
+                    s_s_t = time.time()
                     try:
                         for item in Sigma_p:
                             #print(Sigma_p)
@@ -198,7 +198,7 @@ def sufastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
 
                         msg_noncritical_signal.set()
                         continue
-
+                    print("verify time:", time.time() - s_s_t)
                 # if not decides[slot_cur].empty():
                 #     print(pid, decides[slot_cur].get_nowait())
                 blockheader = (sid, slot_cur, hash_p, hash(batches))
