@@ -91,7 +91,7 @@ class SUFP():
     :param K: a test parameter to specify break out after K epochs
     """
 
-    def __init__(self, sid, pid, S, T, Bfast, Bacs, N, f, sPK, sSK, sPK1, sSK1, sPK2s, sSK2, ePK, eSK, send, recv, K=3, mute=False, omitfast=False):
+    def __init__(self, sid, pid, S, T, Bfast, Bacs, N, f, l, sPK, sSK, sPK1, sSK1, sPK2s, sSK2, ePK, eSK, send, recv, K=3, mute=False, omitfast=False):
 
         self.SLOTS_NUM = S
         self.TIMEOUT = T
@@ -116,7 +116,7 @@ class SUFP():
         self.epoch = 0  # Current block number
         self.transaction_buffer = Queue()
         self._per_epoch_recv = {}  # Buffer of incoming messages
-
+        self.leader = l
         self.K = K
 
         self.s_time = 0
@@ -234,7 +234,7 @@ class SUFP():
         pid = self.id
         N = self.N
         f = self.f
-        leader = e % N
+        leader = self.leader
 
         T = self.TIMEOUT
         #if e == 0:
@@ -338,7 +338,7 @@ class SUFP():
 
                 #assert hash(notarized_block_header) == notarized_block_hash
 
-                send(0, ('VIEW_CHANGE', (txcnt, weighted_delay, tps)))
+                send(leader, ('VIEW_CHANGE', (txcnt, weighted_delay, tps)))
             # else:
             #     notarized_block_header = None
             #     o = (notarized_block_header, None)
@@ -356,7 +356,7 @@ class SUFP():
         de = 0
         t = 0
 
-        if self.id == 0:
+        if self.id == leader:
             while True:
                 sender, msg = vc_recv.get()
                 print(msg)
