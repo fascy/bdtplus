@@ -20,7 +20,7 @@ def instantiate_bft_node(sid, i, B, N, f, l, K, S, T, bft_from_server: Callable,
     if protocol == "bdt":
         bft = BdtBFTNode(sid, i, S, T, B, F, N, f, bft_from_server, bft_to_client, ready, stop, K, mute=mute, omitfast=omitfast, bft_running=bft_running)
     elif protocol == "sufp":
-        bft = SUFPNode(sid, i, S, T, B, F, N, l, f, bft_from_server, bft_to_client, ready, stop, K, mute=mute, omitfast=omitfast, bft_running=bft_running)
+        bft = SUFPNode(sid, i, S, T, B, F, N,  f, l, bft_from_server, bft_to_client, ready, stop, K, mute=mute, omitfast=omitfast, bft_running=bft_running)
     else:
         print("Only support dumbo or mule or stable-hs or rotating-hs")
     return bft
