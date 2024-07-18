@@ -104,7 +104,8 @@ def sufastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
             msg_noncritical_signal.clear()
 
             if msg[0] == 'VOTE' and pid == leader and len(voters[slot_cur]) < N - 1:
-
+                if logger:
+                    logger.info('recv vote in %d slot from node %d, taking %f sec' % (slot_cur, sender, time.time()-s_times[slot_cur]))
                 _, slot, hash_p, sig_p = msg
                 #_, slot, hash_p, raw_sig_p, tx_batch, tx_sig = msg
                 #sig_p = deserialize1(raw_sig_p)
