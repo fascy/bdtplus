@@ -16,7 +16,7 @@ from collections import namedtuple
 from enum import Enum
 
 from dumbobft.core.validators import prbc_validate
-from bdtbft.core.hsfastpath import hsfastpath
+from bdtbft.core.hsfastpath_3 import hsfastpath
 from bdtbft.core.twovalueagreement import twovalueagreement
 from dumbobft.core.validatedcommonsubset import validatedcommonsubset
 from dumbobft.core.provablereliablebroadcast import provablereliablebroadcast

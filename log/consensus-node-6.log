@@ -3164,3 +3164,127 @@
 2024-07-21 20:59:51,263 superfastpath_3.py [line:375] sufastpath INFO Leaves fastpath at 17 slot 
 2024-07-21 20:59:51,263 Superfast.py [line:310] wait_for_fastpath INFO Fastpath of epoch 0 completed 
 2024-07-21 20:59:51,263 Superfast.py [line:339] _run_epoch INFO Fastpath tps: 18123 delay 0.745112 
+2024-07-22 15:44:14,975 bdt_node.py [line:79] run INFO node 6's starts to run consensus on process id 14892 
+2024-07-22 15:44:14,976 bdt_node.py [line:80] run INFO parameters: N=16, f=5, S=15, T=5, fast-batch=10000, acs-batch=62, K=1, O=0 
+2024-07-22 15:44:14,976 bdt_node.py [line:62] prepare_bootstrap INFO node id 6 is inserting dummy payload TXs 
+2024-07-22 15:44:14,976 bdt_node.py [line:70] prepare_bootstrap INFO node id 6 just inserts 50000 TXs 
+2024-07-22 15:44:14,977 bdt_node.py [line:70] prepare_bootstrap INFO node id 6 just inserts 50000 TXs 
+2024-07-22 15:44:14,977 bdt_node.py [line:74] prepare_bootstrap INFO node id 6 completed the loading of dummy TXs 
+2024-07-22 15:44:14,977 bdt.py [line:194] run_bft INFO Node 6 starts to run at time:1721634254.9774792 
+2024-07-22 15:44:14,977 bdt.py [line:247] _run_epoch INFO Node enters epoch 0 
+2024-07-22 15:44:14,978 hsfastpath.py [line:43] hsfastpath INFO Entering fast path 
+2024-07-22 15:44:14,979 hsfastpath.py [line:212] one_slot INFO Entering slot 1 
+2024-07-22 15:44:15,443 hsfastpath.py [line:263] one_slot INFO Leaving slot 1 
+2024-07-22 15:44:15,443 hsfastpath.py [line:212] one_slot INFO Entering slot 2 
+2024-07-22 15:44:15,605 hsfastpath.py [line:263] one_slot INFO Leaving slot 2 
+2024-07-22 15:44:15,605 hsfastpath.py [line:212] one_slot INFO Entering slot 3 
+2024-07-22 15:44:15,818 hsfastpath.py [line:252] one_slot INFO Fast block at Node 6 for Epoch sidAFAST0 and Slot 1 has delay and TXs: 0.8016929626464844, 10000 
+2024-07-22 15:44:15,859 hsfastpath.py [line:263] one_slot INFO Leaving slot 3 
+2024-07-22 15:44:15,859 hsfastpath.py [line:212] one_slot INFO Entering slot 4 
+2024-07-22 15:44:16,052 hsfastpath.py [line:252] one_slot INFO Fast block at Node 6 for Epoch sidAFAST0 and Slot 2 has delay and TXs: 0.5559046268463135, 10000 
+2024-07-22 15:44:16,092 hsfastpath.py [line:263] one_slot INFO Leaving slot 4 
+2024-07-22 15:44:16,093 hsfastpath.py [line:212] one_slot INFO Entering slot 5 
+2024-07-22 15:44:16,248 hsfastpath.py [line:252] one_slot INFO Fast block at Node 6 for Epoch sidAFAST0 and Slot 3 has delay and TXs: 0.6198410987854004, 10000 
+2024-07-22 15:44:16,291 hsfastpath.py [line:263] one_slot INFO Leaving slot 5 
+2024-07-22 15:44:16,291 hsfastpath.py [line:212] one_slot INFO Entering slot 6 
+2024-07-22 15:44:16,487 hsfastpath.py [line:252] one_slot INFO Fast block at Node 6 for Epoch sidAFAST0 and Slot 4 has delay and TXs: 0.5838441848754883, 10000 
+2024-07-22 15:44:16,502 hsfastpath.py [line:263] one_slot INFO Leaving slot 6 
+2024-07-22 15:44:16,503 hsfastpath.py [line:212] one_slot INFO Entering slot 7 
+2024-07-22 15:44:16,732 hsfastpath.py [line:252] one_slot INFO Fast block at Node 6 for Epoch sidAFAST0 and Slot 5 has delay and TXs: 0.6014294624328613, 10000 
+2024-07-22 15:44:16,751 hsfastpath.py [line:263] one_slot INFO Leaving slot 7 
+2024-07-22 15:44:16,751 hsfastpath.py [line:212] one_slot INFO Entering slot 8 
+2024-07-22 15:44:16,967 hsfastpath.py [line:252] one_slot INFO Fast block at Node 6 for Epoch sidAFAST0 and Slot 6 has delay and TXs: 0.6332836151123047, 10000 
+2024-07-22 15:44:16,991 hsfastpath.py [line:263] one_slot INFO Leaving slot 8 
+2024-07-22 15:44:16,991 hsfastpath.py [line:212] one_slot INFO Entering slot 9 
+2024-07-22 15:44:17,165 hsfastpath.py [line:252] one_slot INFO Fast block at Node 6 for Epoch sidAFAST0 and Slot 7 has delay and TXs: 0.6157047748565674, 10000 
+2024-07-22 15:44:17,189 hsfastpath.py [line:263] one_slot INFO Leaving slot 9 
+2024-07-22 15:44:17,189 hsfastpath.py [line:212] one_slot INFO Entering slot 10 
+2024-07-22 15:44:17,395 hsfastpath.py [line:252] one_slot INFO Fast block at Node 6 for Epoch sidAFAST0 and Slot 8 has delay and TXs: 0.5889096260070801, 10000 
+2024-07-22 15:44:17,406 hsfastpath.py [line:263] one_slot INFO Leaving slot 10 
+2024-07-22 15:44:17,406 hsfastpath.py [line:212] one_slot INFO Entering slot 11 
+2024-07-22 15:44:17,545 hsfastpath.py [line:252] one_slot INFO Fast block at Node 6 for Epoch sidAFAST0 and Slot 9 has delay and TXs: 0.5226056575775146, 10000 
+2024-07-22 15:44:17,569 hsfastpath.py [line:263] one_slot INFO Leaving slot 11 
+2024-07-22 15:44:17,569 hsfastpath.py [line:212] one_slot INFO Entering slot 12 
+2024-07-22 15:44:17,825 hsfastpath.py [line:252] one_slot INFO Fast block at Node 6 for Epoch sidAFAST0 and Slot 10 has delay and TXs: 0.5785436630249023, 10000 
+2024-07-22 15:44:17,850 hsfastpath.py [line:263] one_slot INFO Leaving slot 12 
+2024-07-22 15:44:17,850 hsfastpath.py [line:212] one_slot INFO Entering slot 13 
+2024-07-22 15:44:18,038 hsfastpath.py [line:252] one_slot INFO Fast block at Node 6 for Epoch sidAFAST0 and Slot 11 has delay and TXs: 0.6009340286254883, 10000 
+2024-07-22 15:44:18,054 hsfastpath.py [line:263] one_slot INFO Leaving slot 13 
+2024-07-22 15:44:18,055 hsfastpath.py [line:212] one_slot INFO Entering slot 14 
+2024-07-22 15:44:18,189 hsfastpath.py [line:252] one_slot INFO Fast block at Node 6 for Epoch sidAFAST0 and Slot 12 has delay and TXs: 0.5985622406005859, 10000 
+2024-07-22 15:44:18,206 hsfastpath.py [line:263] one_slot INFO Leaving slot 14 
+2024-07-22 15:44:18,206 hsfastpath.py [line:212] one_slot INFO Entering slot 15 
+2024-07-22 15:44:18,370 hsfastpath.py [line:252] one_slot INFO Fast block at Node 6 for Epoch sidAFAST0 and Slot 13 has delay and TXs: 0.4932408332824707, 10000 
+2024-07-22 15:44:18,396 hsfastpath.py [line:263] one_slot INFO Leaving slot 15 
+2024-07-22 15:44:18,396 hsfastpath.py [line:212] one_slot INFO Entering slot 16 
+2024-07-22 15:44:18,513 hsfastpath.py [line:252] one_slot INFO Fast block at Node 6 for Epoch sidAFAST0 and Slot 14 has delay and TXs: 0.43304967880249023, 10000 
+2024-07-22 15:44:18,514 hsfastpath.py [line:263] one_slot INFO Leaving slot 16 
+2024-07-22 15:44:18,514 hsfastpath.py [line:212] one_slot INFO Entering slot 17 
+2024-07-22 15:44:18,626 hsfastpath.py [line:252] one_slot INFO Fast block at Node 6 for Epoch sidAFAST0 and Slot 15 has delay and TXs: 0.3328835964202881, 10000 
+2024-07-22 15:44:18,627 hsfastpath.py [line:263] one_slot INFO Leaving slot 17 
+2024-07-22 15:44:18,627 hsfastpath.py [line:326] hsfastpath INFO Leaves fastpath at 18 slot 
+2024-07-22 15:44:18,627 bdt.py [line:413] wait_for_fastpath INFO Fastpath of epoch 0 completed 
+2024-07-22 15:44:18,669 bdt.py [line:419] wait_for_vc_msg INFO VC messages of epoch 0 collected 
+2024-07-22 15:44:20,997 bdt.py [line:467] _run_epoch INFO VIEW CHANGE costs time: 2.369785 
+2024-07-22 15:44:21,010 bdt.py [line:224] run_bft INFO node 6 breaks in 6.032621 seconds in epoch 0 with total delivered Txs 150000 and average delay 0.570695 and average VC delay 2.369785 
+2024-07-22 15:48:17,027 bdt_node.py [line:79] run INFO node 6's starts to run consensus on process id 15416 
+2024-07-22 15:48:17,028 bdt_node.py [line:80] run INFO parameters: N=16, f=5, S=15, T=5, fast-batch=10000, acs-batch=62, K=1, O=0 
+2024-07-22 15:48:17,028 bdt_node.py [line:62] prepare_bootstrap INFO node id 6 is inserting dummy payload TXs 
+2024-07-22 15:48:17,028 bdt_node.py [line:70] prepare_bootstrap INFO node id 6 just inserts 50000 TXs 
+2024-07-22 15:48:17,029 bdt_node.py [line:70] prepare_bootstrap INFO node id 6 just inserts 50000 TXs 
+2024-07-22 15:48:17,029 bdt_node.py [line:74] prepare_bootstrap INFO node id 6 completed the loading of dummy TXs 
+2024-07-22 15:48:17,029 bdt.py [line:194] run_bft INFO Node 6 starts to run at time:1721634497.0293388 
+2024-07-22 15:48:17,029 bdt.py [line:247] _run_epoch INFO Node enters epoch 0 
+2024-07-22 15:48:17,030 hsfastpath_3.py [line:43] hsfastpath INFO Entering fast path 
+2024-07-22 15:48:17,031 hsfastpath_3.py [line:213] one_slot INFO Entering slot 1 
+2024-07-22 15:48:17,079 hsfastpath_3.py [line:264] one_slot INFO Leaving slot 1 
+2024-07-22 15:48:17,079 hsfastpath_3.py [line:213] one_slot INFO Entering slot 2 
+2024-07-22 15:48:17,271 hsfastpath_3.py [line:264] one_slot INFO Leaving slot 2 
+2024-07-22 15:48:17,272 hsfastpath_3.py [line:213] one_slot INFO Entering slot 3 
+2024-07-22 15:48:17,426 hsfastpath_3.py [line:253] one_slot INFO Fast block at Node 6 for Epoch sidAFAST0 and Slot 1 has delay and TXs: 0.5404138565063477, 10000 
+2024-07-22 15:48:17,439 hsfastpath_3.py [line:264] one_slot INFO Leaving slot 3 
+2024-07-22 15:48:17,439 hsfastpath_3.py [line:213] one_slot INFO Entering slot 4 
+2024-07-22 15:48:17,682 hsfastpath_3.py [line:253] one_slot INFO Fast block at Node 6 for Epoch sidAFAST0 and Slot 2 has delay and TXs: 0.5128445625305176, 10000 
+2024-07-22 15:48:17,712 hsfastpath_3.py [line:264] one_slot INFO Leaving slot 4 
+2024-07-22 15:48:17,713 hsfastpath_3.py [line:213] one_slot INFO Entering slot 5 
+2024-07-22 15:48:17,875 hsfastpath_3.py [line:253] one_slot INFO Fast block at Node 6 for Epoch sidAFAST0 and Slot 3 has delay and TXs: 0.5441303253173828, 10000 
+2024-07-22 15:48:17,892 hsfastpath_3.py [line:264] one_slot INFO Leaving slot 5 
+2024-07-22 15:48:17,892 hsfastpath_3.py [line:213] one_slot INFO Entering slot 6 
+2024-07-22 15:48:18,087 hsfastpath_3.py [line:253] one_slot INFO Fast block at Node 6 for Epoch sidAFAST0 and Slot 4 has delay and TXs: 0.5163822174072266, 10000 
+2024-07-22 15:48:18,100 hsfastpath_3.py [line:264] one_slot INFO Leaving slot 6 
+2024-07-22 15:48:18,101 hsfastpath_3.py [line:213] one_slot INFO Entering slot 7 
+2024-07-22 15:48:18,367 hsfastpath_3.py [line:253] one_slot INFO Fast block at Node 6 for Epoch sidAFAST0 and Slot 5 has delay and TXs: 0.5431632995605469, 10000 
+2024-07-22 15:48:18,392 hsfastpath_3.py [line:264] one_slot INFO Leaving slot 7 
+2024-07-22 15:48:18,392 hsfastpath_3.py [line:213] one_slot INFO Entering slot 8 
+2024-07-22 15:48:18,559 hsfastpath_3.py [line:253] one_slot INFO Fast block at Node 6 for Epoch sidAFAST0 and Slot 6 has delay and TXs: 0.5391037464141846, 10000 
+2024-07-22 15:48:18,575 hsfastpath_3.py [line:264] one_slot INFO Leaving slot 8 
+2024-07-22 15:48:18,575 hsfastpath_3.py [line:213] one_slot INFO Entering slot 9 
+2024-07-22 15:48:18,734 hsfastpath_3.py [line:253] one_slot INFO Fast block at Node 6 for Epoch sidAFAST0 and Slot 7 has delay and TXs: 0.5062477588653564, 10000 
+2024-07-22 15:48:18,760 hsfastpath_3.py [line:264] one_slot INFO Leaving slot 9 
+2024-07-22 15:48:18,760 hsfastpath_3.py [line:213] one_slot INFO Entering slot 10 
+2024-07-22 15:48:18,923 hsfastpath_3.py [line:253] one_slot INFO Fast block at Node 6 for Epoch sidAFAST0 and Slot 8 has delay and TXs: 0.49278950691223145, 10000 
+2024-07-22 15:48:18,940 hsfastpath_3.py [line:264] one_slot INFO Leaving slot 10 
+2024-07-22 15:48:18,940 hsfastpath_3.py [line:213] one_slot INFO Entering slot 11 
+2024-07-22 15:48:19,161 hsfastpath_3.py [line:253] one_slot INFO Fast block at Node 6 for Epoch sidAFAST0 and Slot 9 has delay and TXs: 0.5345728397369385, 10000 
+2024-07-22 15:48:19,204 hsfastpath_3.py [line:264] one_slot INFO Leaving slot 11 
+2024-07-22 15:48:19,204 hsfastpath_3.py [line:213] one_slot INFO Entering slot 12 
+2024-07-22 15:48:19,411 hsfastpath_3.py [line:253] one_slot INFO Fast block at Node 6 for Epoch sidAFAST0 and Slot 10 has delay and TXs: 0.5458240509033203, 10000 
+2024-07-22 15:48:19,442 hsfastpath_3.py [line:264] one_slot INFO Leaving slot 12 
+2024-07-22 15:48:19,443 hsfastpath_3.py [line:213] one_slot INFO Entering slot 13 
+2024-07-22 15:48:19,586 hsfastpath_3.py [line:253] one_slot INFO Fast block at Node 6 for Epoch sidAFAST0 and Slot 11 has delay and TXs: 0.5182240009307861, 10000 
+2024-07-22 15:48:19,606 hsfastpath_3.py [line:264] one_slot INFO Leaving slot 13 
+2024-07-22 15:48:19,607 hsfastpath_3.py [line:213] one_slot INFO Entering slot 14 
+2024-07-22 15:48:19,781 hsfastpath_3.py [line:253] one_slot INFO Fast block at Node 6 for Epoch sidAFAST0 and Slot 12 has delay and TXs: 0.4987645149230957, 10000 
+2024-07-22 15:48:19,803 hsfastpath_3.py [line:264] one_slot INFO Leaving slot 14 
+2024-07-22 15:48:19,803 hsfastpath_3.py [line:213] one_slot INFO Entering slot 15 
+2024-07-22 15:48:20,034 hsfastpath_3.py [line:253] one_slot INFO Fast block at Node 6 for Epoch sidAFAST0 and Slot 13 has delay and TXs: 0.5100908279418945, 10000 
+2024-07-22 15:48:20,069 hsfastpath_3.py [line:264] one_slot INFO Leaving slot 15 
+2024-07-22 15:48:20,070 hsfastpath_3.py [line:213] one_slot INFO Entering slot 16 
+2024-07-22 15:48:20,146 hsfastpath_3.py [line:253] one_slot INFO Fast block at Node 6 for Epoch sidAFAST0 and Slot 14 has delay and TXs: 0.4406857490539551, 10000 
+2024-07-22 15:48:20,147 hsfastpath_3.py [line:264] one_slot INFO Leaving slot 16 
+2024-07-22 15:48:20,147 hsfastpath_3.py [line:213] one_slot INFO Entering slot 17 
+2024-07-22 15:48:20,204 hsfastpath_3.py [line:253] one_slot INFO Fast block at Node 6 for Epoch sidAFAST0 and Slot 15 has delay and TXs: 0.2877628803253174, 10000 
+2024-07-22 15:48:20,204 hsfastpath_3.py [line:264] one_slot INFO Leaving slot 17 
+2024-07-22 15:48:20,206 hsfastpath_3.py [line:327] hsfastpath INFO Leaves fastpath at 18 slot 
+2024-07-22 15:48:20,206 bdt.py [line:413] wait_for_fastpath INFO Fastpath of epoch 0 completed 
+2024-07-22 15:48:20,254 bdt.py [line:419] wait_for_vc_msg INFO VC messages of epoch 0 collected 
