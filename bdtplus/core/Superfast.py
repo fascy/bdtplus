@@ -16,7 +16,7 @@ from collections import namedtuple
 from enum import Enum
 
 
-from bdtplus.core.superfastpath import sufastpath
+from bdtplus.core.superfastpath_3 import sufastpath
 from crypto.threshsig.boldyreva import TBLSPrivateKey, TBLSPublicKey
 from crypto.ecdsa.ecdsa import PrivateKey
 from honeybadgerbft.exceptions import UnknownTagError
