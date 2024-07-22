@@ -161,6 +161,8 @@ class SUFP():
                 #gevent.sleep(0)
                 try:
                     (sender, (r, msg)) = self._recv()
+                    if self.id == self.leader:
+                        print('recv', sender)
                     # Maintain an *unbounded* recv queue for each epoch
                     if r not in self._per_epoch_recv:
                         self._per_epoch_recv[r] = Queue()
@@ -302,7 +304,7 @@ class SUFP():
 
         def wait_for_fastpath():
             suoutput[0], suoutput[1] = fast_thread.get()
-            print(suoutput[1])
+            # print(suoutput[1])
             vc_ready.set()
             if self.logger != None:
                 self.logger.info('Fastpath of epoch %d completed' % e)
@@ -334,11 +336,12 @@ class SUFP():
                 # tps = int(epoch_txcnt) / (e_time - s_etime)
                 (txcnt, tps, weighted_delay) = suoutput[1]
                 if self.logger:
-                    self.logger.info('Fastpath tps: %d' % tps)
+                    self.logger.info('Fastpath tps: %d delay %f' % (tps, weighted_delay))
 
                 #assert hash(notarized_block_header) == notarized_block_hash
 
                 send(leader, ('VIEW_CHANGE', (txcnt, weighted_delay, tps)))
+                print(pid, "send vc!")
             # else:
             #     notarized_block_header = None
             #     o = (notarized_block_header, None)
@@ -359,7 +362,7 @@ class SUFP():
         if self.id == leader:
             while True:
                 sender, msg = vc_recv.get()
-                print(msg)
+                print("recv", sender, msg)
                 cnt, delay, tps = msg
                 de += delay
                 t += tps

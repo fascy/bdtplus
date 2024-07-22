@@ -79,17 +79,11 @@ def sufastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
     weighted_delay = 0
 
     weighted_tps = 0
-
+    send_sort = []
     def handle_messages():
         nonlocal leader, hash_prev, pending_block, notraized_block, fixed_block, voters, votes, slot_cur
 
         while True:
-            if pid == leader and time.time() - s_times_l[slot_cur] > TIMEOUTL:
-                print(time.time() - s_times_l[slot_cur], "leader timeout!")
-                return False
-            elif pid != leader and time.time() - s_times[slot_cur] > TIMEOUT:
-                print("timeout!")
-                return
             #gevent.sleep(0)
 
             (sender, msg) = recv()
@@ -106,6 +100,7 @@ def sufastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
             if msg[0] == 'VOTE' and pid == leader and len(voters[slot_cur]) < N - 1:
                 if logger:
                     logger.info('recv vote in %d slot from node %d, taking %f sec' % (slot_cur, sender, time.time()-s_times[slot_cur]))
+
                 _, slot, hash_p, sig_p = msg
                 #_, slot, hash_p, raw_sig_p, tx_batch, tx_sig = msg
                 #sig_p = deserialize1(raw_sig_p)
@@ -113,15 +108,15 @@ def sufastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
                 if sender not in voters[slot_cur]:
 
                     try:
-                        assert slot == slot_cur-1
+                        assert slot == slot_cur
                     except AssertionError:
                         if logger is not None:
                             # logger.info("vote out of sync from node %d" % sender)
                             pass
-                        #if slot < slot_cur:
-                        #    if logger is not None: logger.info("Late vote from node %d! Not needed anymore..." % sender)
-                        #else:
-                        #    if logger is not None: logger.info("Too early vote from node %d! I do not decide earlier block yet..." % sender)
+                        if slot < slot_cur:
+                           if logger is not None: logger.info("Late vote from node %d! Not needed anymore..." % sender)
+                        else:
+                           if logger is not None: logger.info("Too early vote from node %d! I do not decide earlier block yet..." % sender)
                         msg_noncritical_signal.set()
                         continue
 
@@ -145,26 +140,39 @@ def sufastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
                     voters[slot_cur].add(sender)
 
                     votes[slot_cur][sender] = sig_p
-
+                    if slot_cur == 3:
+                        send_sort.append(sender)
                     if len(voters[slot_cur]) == N-1 and not decide_sent[slot_cur]:
+                        if logger:
+                            logger.info('get n vote in slot %d taking %f sec' %(slot_cur, time.time()-s_times[slot_cur]))
                         #print(slot_cur)
+                        if logger and slot_cur == 3:
+                            for i in reversed(send_sort):
+                                print("i", i)
+
+                        #     logger.info('send list: %s' % str(reversed(send_sort)))
                         Sigma = tuple(votes[slot_cur].items())
-                        if slot_cur == SLOTS_NUM + 1:
+                        if slot_cur == SLOTS_NUM + 1 or slot_cur == SLOTS_NUM + 2:
                             tx_batch = 'Dummy'
                         else:
                             try:
                                 tx_batch = json.dumps([get_input()] * BATCH_SIZE)
                             except Exception as e:
                                 tx_batch = json.dumps(['Dummy' for _ in range(BATCH_SIZE)])
-
-                        send(-2, ('PROPOSE', slot_cur, hash_prev, Sigma, tx_batch))
-                        if slot_cur <= SLOTS_NUM:
-                            s_times_l[slot_cur+1] = time.time()
+                        if slot_cur >= 3:
+                            for k in reversed(send_sort):
+                                print(time.time(), "send to", k)
+                                send(k, ('PROPOSE', slot_cur, hash_prev, Sigma, tx_batch))
+                                time.sleep(0.00001)
+                        else:
+                            send(-2, ('PROPOSE', slot_cur, hash_prev, Sigma, tx_batch))
                         #if logger is not None: logger.info("Decide made and sent")
                         decide_sent[slot_cur] = True
 
                         decides[slot_cur].put_nowait((hash_p, Sigma, tx_batch))
 
+                        # msg_noncritical_signal.set()
+                        if logger: logger.info('send msg for slot %d taking %f sec' % (slot_cur, time.time()-s_times[slot_cur]))
             if msg[0] == "PROPOSE" and pid != leader:
 
                 _, slot, hash_p, Sigma_p, batches = msg
@@ -201,9 +209,9 @@ def sufastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
                     print("verify time:", time.time() - s_s_t)
                 # if not decides[slot_cur].empty():
                 #     print(pid, decides[slot_cur].get_nowait())
-                blockheader = (sid, slot_cur, hash_p, hash(batches))
-                sig_prev = ecdsa_sign(SK2, hash(blockheader))
-                send(leader, ('VOTE', slot_cur, hash(blockheader), sig_prev))
+                # blockheader = (sid, slot_cur, hash_p, hash(batches))
+                # sig_prev = ecdsa_sign(SK2, hash(blockheader))
+                # send(leader, ('VOTE', slot_cur, hash(blockheader), sig_prev))
                 decides[slot_cur].put_nowait((hash_p, Sigma_p, batches))
                 # print(pid, "vote=n=f and put")
 
@@ -226,28 +234,20 @@ def sufastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
             logger.info("Entering slot %d" % slot_cur)
 
         s_times[slot_cur] = time.time()
-        if pid == leader and slot_cur == 1:
-            if slot_cur == SLOTS_NUM + 1 or slot_cur == SLOTS_NUM + 2:
-                tx_batch = 'Dummy'
-            else:
-                try:
-                    tx_batch = json.dumps([get_input()] * BATCH_SIZE)
-                except Exception as e:
-                    tx_batch = json.dumps(['Dummy' for _ in range(BATCH_SIZE)])
+        if pid != leader:
             try:
-                send(-2, ('PROPOSE', slot_cur, hash_prev, 0, tx_batch))
-                s_times_l[slot_cur + 1] = time.time()
-                decides[slot_cur].put_nowait((hash_prev, 0, tx_batch))
-                # sig_prev = ecdsa_sign(SK2, hash_prev)
-                # send(leader, ('VOTE', slot_cur, hash_prev, sig_prev))
+                sig_prev = ecdsa_sign(SK2, hash_prev)
+                send(leader, ('VOTE', slot_cur, hash_prev, sig_prev))
             except AttributeError as e:
                 if logger is not None:
                     logger.info(traceback.print_exc())
 
+
         #print('4')
 
         (h_p, Sigma_p, batches) = decides[slot_cur].get()  # Block to wait for the voted block
-
+        if logger:
+            logger.info('pending block %d in %f' %(slot_cur, time.time()-s_times[slot_cur]))
 
         ########################
         # Enter critical block #
@@ -255,7 +255,8 @@ def sufastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
 
         slot_noncritical_signal.clear()
         msg_noncritical_signal.wait()
-
+        if logger:
+            logger.info('2pending block %d in %f' %(slot_cur, time.time()-s_times[slot_cur]))
 
 
         if pending_block is not None:
@@ -263,20 +264,30 @@ def sufastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
             #fix block: sid, s-1, hash(B_{s-2}), B_{s-1}, Sigma_{s-1}
             fixed_block = pending_block
             fixed_block[4] = Sigma_p
+
             # assert fixed_block[1] + 2 == slot_cur
+            print(pid, "in slot", slot_cur, "fix", fixed_block[1])
 
         # pending block: sid s, hash(B_{s-1}), B_s, Sigma_s(as bot)
-        pending_block = [sid, slot_cur, h_p, batches, 0]
-        # print(pid, "pending:", slot_cur, hash(batches))
-        pending_block_header = (sid, slot_cur, h_p, hash(batches))
+        pending_block = [sid, slot_cur, hash_prev, batches, 0]
 
+        pending_block_header = (sid, pending_block[1], pending_block[2], hash(pending_block[3]))
         hash_prev = hash(pending_block_header)
-        print(pid, "pending:", slot_cur, hash_prev)
+        if logger:
+            logger.info('read pending block %d in %f' % (slot_cur, time.time() - s_times[slot_cur]))
+        # print(pid, "pending:", slot_cur, hash(batches))
+        # pending_block_header = (sid, slot_cur+1, h_p, hash(batches))
+
+
+        # print(pid, "pending:", slot_cur, hash_prev)
         # assert notraized_block[1] + 1 == slot_cur
         if fixed_block is not None and fixed_block[1] >= 8:
+            if logger:
+                logger.info('3pending block %d in %f' % (slot_cur, time.time() - s_times[slot_cur]))
             e_times[fixed_block[1]] = time.time()
             delay[fixed_block[1]] = e_times[fixed_block[1]] - s_times[fixed_block[1]]
-            print(slot_cur,"running time\t\t", delay[fixed_block[1]])
+            if logger:
+                logger.info('delay block %d in %f' % (fixed_block[1], delay[fixed_block[1]]))
             txcnt[fixed_block[1]] = str(fixed_block).count("Dummy TX")
             weighted_delay = (epoch_txcnt * weighted_delay + txcnt[fixed_block[1]] * delay[fixed_block[1]]) / (epoch_txcnt + txcnt[fixed_block[1]])
             print(slot_cur, "weighted_delay\t", weighted_delay)
@@ -289,6 +300,8 @@ def sufastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
 
             if output_notraized_block is not None:
                 output_notraized_block((fixed_block, (epoch_txcnt, weighted_delay)))
+            if logger:
+                logger.info('output block for slot %d taking %f sec' % (fixed_block[1], time.time()-s_times[fixed_block[1]]))
             weighted_tps = epoch_txcnt/(time.time()-start_time)
 
         if logger is not None:
@@ -333,7 +346,7 @@ def sufastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
         #timeout.start()
 
         timeout = Timeout(TIMEOUT)
-        print(TIMEOUT)
+        # print(TIMEOUT)
         timeout.start()
         try:
             with gevent.Timeout(TIMEOUT, False):
