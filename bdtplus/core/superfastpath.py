@@ -163,7 +163,7 @@ def sufastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
                             for k in reversed(send_sort):
                                 print(time.time(), "send to", k)
                                 send(k, ('PROPOSE', slot_cur, hash_prev, Sigma, tx_batch))
-                                time.sleep(0.00001)
+                                time.sleep(0.0001)
                         else:
                             send(-2, ('PROPOSE', slot_cur, hash_prev, Sigma, tx_batch))
                         #if logger is not None: logger.info("Decide made and sent")
