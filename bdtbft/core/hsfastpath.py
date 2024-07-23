@@ -250,7 +250,8 @@ def hsfastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
 
                 if logger is not None:
                     logger.info('Fast block at Node %d for Epoch %s and Slot %d has delay and TXs: %s, %d' % (pid, sid, fixed_block[1], str(delay[fixed_block[1]]), txcnt[fixed_block[1]]))
-
+                if logger:
+                    logger.info('AVG TPS: %d' % (epoch_txcnt/(time.time()-start_time)))
 
             if output_notraized_block is not None:
                 output_notraized_block((notraized_block, (h_p, Sigma_p, (epoch_txcnt, weighted_delay))))
@@ -279,7 +280,8 @@ def hsfastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
     #gevent.sleep(0)
 
     while slot_cur <= SLOTS_NUM + 2:
-
+        if slot_cur == 8:
+            start_time = time.time()
         #if logger is not None:
         #    logger.info("Enter fastpath's slot %d out of all %d slots" % (slot_cur, SLOTS_NUM))
 
