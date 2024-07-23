@@ -1,5 +1,0 @@
-N=16, B=3500 
-
-after running 120sec:
-average tps: 173586.070874 tx/sec
-average latency: 2.138481 sec

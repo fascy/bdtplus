@@ -2,22 +2,25 @@ from gevent import monkey; monkey.patch_all(thread=False)
 
 import time
 import pickle
-from typing import List, Callable
 import gevent
 import os
+import logging
+import traceback
+import random
+from typing import List, Callable
 from multiprocessing import Value as mpValue, Process
 from gevent import socket, lock
 from gevent.queue import Queue
-import logging
-import traceback
-
+from ctypes import c_bool
 
 # Network node class: deal with socket communications
 class NetworkClient (Process):
 
     SEP = '\r\nSEP\r\nSEP\r\nSEP\r\n'.encode('utf-8')
 
-    def __init__(self, port: int, my_ip: str, id: int, addresses_list: list, client_from_bft: Callable, client_ready: mpValue, stop: mpValue, s=0):
+    def __init__(self, port: int, my_ip: str, id: int, addresses_list: list, client_from_bft: Callable, client_ready: mpValue, stop: mpValue, bft_running: mpValue = mpValue(c_bool, False), dynamic=True):
+
+        self.bft_running = bft_running
 
         self.client_from_bft = client_from_bft
         self.ready = client_ready
@@ -34,8 +37,21 @@ class NetworkClient (Process):
         self.socks = [None for _ in self.addresses_list]
         self.sock_queues = [Queue() for _ in self.addresses_list]
         self.sock_locks = [lock.Semaphore() for _ in self.addresses_list]
-        self.s = s
-        self.BYTES = 5000
+
+        self.TIME = 100
+        # 500Mbps
+        # self.BYTES = 6_250_000
+        # 200Mbps
+        # self.BYTES = 2_500_000
+        # 100Mbps
+        # self.BYTES = 1_250_000
+        # 50Mbps
+        self.BYTES = 625_000
+        self.DELAY = 50
+
+        self.network_condition = True
+        self.DYNAMIC = dynamic
+
         super().__init__()
 
 
@@ -46,22 +62,33 @@ class NetworkClient (Process):
             try:
                 for j in range(self.N):
                     if not self.is_out_sock_connected[j]:
-                        self.is_out_sock_connected[j] = self._connect(j)
+                        while True:
+                            self.is_out_sock_connected[j] = self._connect(j)
+                            if self.is_out_sock_connected[j]:
+                                break
                 if all(self.is_out_sock_connected):
                     with self.ready.get_lock():
                         self.ready.value = True
                     break
             except Exception as e:
                 self.logger.info(str((e, traceback.print_exc())))
-        send_threads = [gevent.spawn(self._send, j) for j in range(self.N)]
+        if self.DYNAMIC:
+            # gevent.spawn(self._change_network)
+            send_threads = [gevent.spawn(self._dynamic_send, j) for j in range(self.N)]
+        else:
+            send_threads = [gevent.spawn(self._send, j) for j in range(self.N)]
+        # partten_thread = gevent.spawn(self._pattern)
         self._handle_send_loop()
         #gevent.joinall(send_threads)
+
 
     def _connect(self, j: int):
         sock = socket.socket()
         if self.ip == '127.0.0.1':
-            # print(self.ip"bind", self.port + j + 1)
-            sock.bind((self.ip, self.port + j + 1))
+            try:
+                sock.bind((self.ip, self.port + j + random.randint(1, 100)))
+            except:
+                return False
         try:
             sock.connect(self.addresses_list[j])
             self.socks[j] = sock
@@ -69,68 +96,102 @@ class NetworkClient (Process):
         except Exception as e1:
             return False
 
-    def _send(self, j: int):
-        if self.s == 1:
-            cnt = self.BYTES  # 1000 bytes
-            msg = None
 
-            while not self.stop.value:
+    def _pattern(self):
+        while not self.stop.value:
+            if self.network_condition:  # True="50ms-200Mbps"
+                self.TIME = 100
+                self.BYTES = 2_500_000
+                self.DELAY = 50
+            if not self.network_condition:  # False="300ms-50Mbps"
+                self.TIME = 100
+                self.BYTES = 625_000
+                self.DELAY = 300
+            gevent.sleep(1)
+            #print(self.pattern.value)
 
-                if msg is None:
-                    o = self.sock_queues[j].get()
-                    msg = pickle.dumps(o) + self.SEP
 
-                if len(msg) <= cnt:
-                    cnt = cnt - len(msg)
-                    try:
-                        self.socks[j].sendall(msg)
-                        msg = None
-                    except:
-                        self.logger.error("fail to send msg")
-                        # self.logger.error(str((e1, traceback.print_exc())))
-                        self.socks[j].close()
-                        break
-                else:
-                    msg1 = msg[0:cnt]
-                    msg = msg[cnt:]
-                    try:
-                        self.socks[j].sendall(msg1)
-                        cnt = 0
-                    except:
-                        self.logger.error("fail to send msg")
-                        # self.logger.error(str((e1, traceback.print_exc())))
-                        self.socks[j].close()
-                        break
+    def _dynamic_send(self, j: int):
+        #  100kbps - 12.5 kB : 1 sec
+        #  500kbps - 62.5 kB : 1 sec
+        #  1Mbps - 125 kB : 1 sec
+        #  5Mbps - 625 kB : 1 sec
+        #  50Mbps - 6250 kB : 1 sec
 
-                if cnt == 0:
-                    cnt = self.BYTES
-                    if self.s == 1:
-                        time.sleep(0.00001)
-        else:
-            while not self.stop.value:
-                # gevent.sleep(0)
-                # self.sock_locks[j].acquire()
+        cnt = self.BYTES  # 1000 bytes
+        msg = None
+
+        while not self.stop.value:
+
+            if cnt == self.BYTES:
+                start = time.time() * 1000
+
+            if msg is None:
                 o = self.sock_queues[j].get()
+                msg = pickle.dumps(o) + self.SEP
+                gevent.sleep(self.DELAY / 1000)
+
+            if len(msg) <= cnt:
+                cnt = cnt - len(msg)
                 try:
-                    # time.sleep(int(self.id) * 0.01)
-                    msg = pickle.dumps(o)
-                    self.socks[j].sendall(msg + self.SEP)
+                    self.socks[j].sendall(msg)
+                    msg = None
                 except:
                     self.logger.error("fail to send msg")
                     # self.logger.error(str((e1, traceback.print_exc())))
                     self.socks[j].close()
                     break
-                # self.sock_locks[j].release()
+            else:
+                msg1 = msg[0:cnt]
+                msg = msg[cnt:]
+                try:
+                    self.socks[j].sendall(msg1)
+                    cnt = 0
+                except:
+                    self.logger.error("fail to send msg")
+                    # self.logger.error(str((e1, traceback.print_exc())))
+                    self.socks[j].close()
+                    break
+
+            if cnt == 0:
+                end = time.time() * 1000
+                duration = end - start
+                # print(duration)
+                cnt = self.BYTES
+                gevent.sleep(max((self.TIME - duration) / 1000, 0))
+
+
+    def _send(self, j:int):
+        while not self.stop.value:
+            o = self.sock_queues[j].get()
+            msg = pickle.dumps(o)
+            while True:
+                try:
+                    self.socks[j].sendall(msg + self.SEP)
+                    break
+                except Exception as e:
+                    self.logger.error("fail to send msg")
+                    try:
+                        self.logger.error(str((e, traceback.print_exc())))
+                        self.socks[j].shutdown(socket.SHUT_RDWR)
+                        self.socks[j].close()
+                    except:
+                        pass
+                    while True:
+                        succ = self._connect(j)
+                        if succ:
+                            break
+                        else:
+                            gevent.sleep(0.01)
+
 
     ##
     def _handle_send_loop(self):
         while not self.stop.value:
             try:
-
                 j, o = self.client_from_bft()
-                # print("！！！！！！！！！！！！1", j, o)
                 #o = self.send_queue[j].get_nowait()
-
+                #print('send' + str((j, o)))
                 #self.logger.info('send' + str((j, o)))
                 try:
                     #self._send(j, pickle.dumps(o))
@@ -151,14 +212,42 @@ class NetworkClient (Process):
 
         #print("sending loop quits ...")
 
+    def _change_network(self):
+        seconds = 0
+        self.network_condition = True
+        while not self.bft_running.value:
+            gevent.sleep(0.0001)
+        while seconds < 59:
+            seconds += 1
+            gevent.sleep(1)
+        self.network_condition = False
+        self.logger.info("change to bad network....")
+        while seconds < 61:
+            seconds += 1
+            gevent.sleep(1)
+        self.network_condition = True
+        self.logger.info("change to good network....")
+        while not self.stop.value:
+            seconds += 1
+            if seconds % 120 == 0:
+                if int(seconds / 120) % 2 == 1:
+                    self.network_condition = False
+                    self.logger.info("change to bad network....")
+                else:
+                    self.network_condition = True
+                    self.logger.info("change to good network....")
+            gevent.sleep(1)
+
+    #Greenlet(_change_network).start()
+
+
     def run(self):
         self.logger = self._set_client_logger(self.id)
         pid = os.getpid()
         self.logger.info('node id %d is running on pid %d' % (self.id, pid))
         with self.ready.get_lock():
             self.ready.value = False
-        conn_thread = gevent.spawn(self._connect_and_send_forever)
-        conn_thread.join()
+        self._connect_and_send_forever()
 
     def stop_service(self):
         with self.stop.get_lock():
@@ -174,6 +263,6 @@ class NetworkClient (Process):
             os.mkdir(os.getcwd() + '/log')
         full_path = os.path.realpath(os.getcwd()) + '/log/' + "node-net-client-" + str(id) + ".log"
         file_handler = logging.FileHandler(full_path)
-        file_handler.setFormatter(formatter)  # 可以通过setFormatter指定输出格式
+        file_handler.setFormatter(formatter)
         logger.addHandler(file_handler)
         return logger
