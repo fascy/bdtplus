@@ -48,10 +48,11 @@ class NetworkServer(Process):
             buf = b''
             try:
                 while not self.stop.value:
-                    if self.win == 1:
-                        buf += sock.recv(212992 * 4)
-                    else:
-                        buf += sock.recv(212992 * 4)
+                    buf += sock.recv(2_000_000)
+                    # if self.win == 1:
+                    #     buf += sock.recv(212992 * 4)
+                    # else:
+                    #     buf += sock.recv(212992 * 4)
                         # buf += sock.recv(106496)
                     tmp = buf.split(self.SEP, 1)
                     while len(tmp) == 2:
