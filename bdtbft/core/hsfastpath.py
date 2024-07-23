@@ -241,7 +241,7 @@ def hsfastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
             notraized_block = (pending_block[0], pending_block[1], pending_block[2], pending_block[4])
             assert notraized_block[1] + 1 == slot_cur
 
-            if fixed_block is not None:
+            if fixed_block is not None and fixed_block[1]>=8:
                 e_times[fixed_block[1]] = time.time()
                 delay[fixed_block[1]] = e_times[fixed_block[1]] - s_times[fixed_block[1]]
                 txcnt[fixed_block[1]] = str(fixed_block).count("Dummy TX")

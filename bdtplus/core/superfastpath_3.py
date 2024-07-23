@@ -43,7 +43,6 @@ def sufastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
         logger.info("Entering fast path")
 
     TIMEOUT = Tout
-    TIMEOUTL = (Tout * 2) / 3
     SLOTS_NUM = Snum
     BATCH_SIZE = Bsize
 
@@ -70,7 +69,6 @@ def sufastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
     slot_noncritical_signal.set()
 
     s_times = [0] * (SLOTS_NUM + 3)
-    s_times_l = [0] * (SLOTS_NUM + 3)
     e_times = [0] * (SLOTS_NUM + 3)
     txcnt =  [0] * (SLOTS_NUM + 3)
     delay =  [0] * (SLOTS_NUM + 3)
