@@ -42,11 +42,11 @@ class NetworkClient (Process):
         # 500Mbps
         # self.BYTES = 6_250_000
         # 200Mbps
-        # self.BYTES = 2_500_000
+        self.BYTES = 2_500_000
         # 100Mbps
         # self.BYTES = 1_250_000
         # 50Mbps
-        self.BYTES = 625_000
+        # self.BYTES = 625_000
         self.DELAY = 50
 
         self.network_condition = True
