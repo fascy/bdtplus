@@ -9,6 +9,6 @@ killall python3
 i=0
 while [ "$i" -lt $1 ]; do
     echo "start node $i..."
-    python3 run_socket_node.py --sid 'sidA' --id $i --N $1 --f $2 --B $3 --K 1 --l 0 --S 15 --T 5 --F 1000 --P "bdt" &
+    python3 run_socket_node.py --sid 'sidA' --id $i --N $1 --f $2 --B $3 --K 1 --l 0 --S 15 --T 5 --F 1000 --P "sufp" &
     i=$(( i + 1 ))
 done
