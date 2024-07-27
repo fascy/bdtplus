@@ -67,10 +67,10 @@ def hsfastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
     slot_noncritical_signal = Event()
     slot_noncritical_signal.set()
 
-    s_times = [0] * (SLOTS_NUM + 4)
-    e_times = [0] * (SLOTS_NUM + 4)
-    txcnt =  [0] * (SLOTS_NUM + 4)
-    delay =  [0] * (SLOTS_NUM + 4)
+    s_times = [0] * (SLOTS_NUM + 3)
+    e_times = [0] * (SLOTS_NUM + 3)
+    txcnt =  [0] * (SLOTS_NUM + 3)
+    delay =  [0] * (SLOTS_NUM + 3)
 
     epoch_txcnt = 0
     weighted_delay = 0
@@ -96,8 +96,8 @@ def hsfastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
             msg_noncritical_signal.clear()
 
             if msg[0] == 'VOTE' and pid == leader and len(voters[slot_cur]) < N - f:
-                print("s", slot_cur)
-                if logger:
+                # print("s", slot_cur)
+                if logger and slot_cur < SLOTS_NUM+2:
                     logger.info('recv vote in %d slot from node %d, taking %f sec' % (
                     slot_cur, sender, time.time() - s_times[slot_cur]))
                 _, slot, hash_p, sig_p = msg
@@ -154,8 +154,11 @@ def hsfastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
                             except Exception as e:
                                 tx_batch = json.dumps(['Dummy' for _ in range(BATCH_SIZE)])
                         if slot_cur >= 3:
+                            b = [_ for _ in range(N) if _ not in send_sort]
+                            for i in b:
+                                send_sort.append(i)
                             for k in reversed(send_sort):
-                                print(time.time(), "send to", k)
+                                # print(time.time(), "send to", k)
                                 send(k, ('DECIDE', slot_cur, hash_prev, Sigma, tx_batch))
                                 # time.sleep(0.01)
                         else:
