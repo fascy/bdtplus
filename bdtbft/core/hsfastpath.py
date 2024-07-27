@@ -59,7 +59,7 @@ def hsfastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
     votes = defaultdict(lambda: dict())
     decides = defaultdict(lambda: Queue(1))
 
-    decide_sent = [False] * (SLOTS_NUM + 3)  # The first item of the list is not used
+    decide_sent = [False] * (SLOTS_NUM + 4)  # The first item of the list is not used
 
     msg_noncritical_signal = Event()
     msg_noncritical_signal.set()
@@ -67,10 +67,10 @@ def hsfastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
     slot_noncritical_signal = Event()
     slot_noncritical_signal.set()
 
-    s_times = [0] * (SLOTS_NUM + 3)
-    e_times = [0] * (SLOTS_NUM + 3)
-    txcnt =  [0] * (SLOTS_NUM + 3)
-    delay =  [0] * (SLOTS_NUM + 3)
+    s_times = [0] * (SLOTS_NUM + 4)
+    e_times = [0] * (SLOTS_NUM + 4)
+    txcnt =  [0] * (SLOTS_NUM + 4)
+    delay =  [0] * (SLOTS_NUM + 4)
 
     epoch_txcnt = 0
     weighted_delay = 0
@@ -96,8 +96,10 @@ def hsfastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
             msg_noncritical_signal.clear()
 
             if msg[0] == 'VOTE' and pid == leader and len(voters[slot_cur]) < N - f:
-                # if logger:
-                #     logger.info('recv vote in %d slot from node %d, taking %f sec' %(slot_cur, pid, time.time()-s_times[slot_cur]))
+                print("s", slot_cur)
+                if logger:
+                    logger.info('recv vote in %d slot from node %d, taking %f sec' % (
+                    slot_cur, sender, time.time() - s_times[slot_cur]))
                 _, slot, hash_p, sig_p = msg
                 #_, slot, hash_p, raw_sig_p, tx_batch, tx_sig = msg
                 #sig_p = deserialize1(raw_sig_p)
