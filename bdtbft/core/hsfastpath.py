@@ -74,7 +74,7 @@ def hsfastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
 
     epoch_txcnt = 0
     weighted_delay = 0
-
+    send_sort = []
 
 
     def handle_messages():
@@ -139,7 +139,8 @@ def hsfastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
                     voters[slot_cur].add(sender)
 
                     votes[slot_cur][sender] = sig_p
-
+                    if slot_cur == 3:
+                        send_sort.append(sender)
                     if len(voters[slot_cur]) == N - f and not decide_sent[slot_cur]:
                         if logger:
                             logger.info('get n-f vote in slot %d taking %f sec' %(slot_cur, time.time()-s_times[slot_cur]))
@@ -152,8 +153,14 @@ def hsfastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
                                 tx_batch = json.dumps([get_input()] * BATCH_SIZE)
                             except Exception as e:
                                 tx_batch = json.dumps(['Dummy' for _ in range(BATCH_SIZE)])
-
-                        send(-2, ('DECIDE', slot_cur, hash_prev, Sigma, tx_batch))
+                        if slot_cur >= 3:
+                            for k in reversed(send_sort):
+                                print(time.time(), "send to", k)
+                                send(k, ('DECIDE', slot_cur, hash_prev, Sigma, tx_batch))
+                                # time.sleep(0.01)
+                        else:
+                            send(-2, ('DECIDE', slot_cur, hash_prev, Sigma, tx_batch))
+                        # send(-2, ('DECIDE', slot_cur, hash_prev, Sigma, tx_batch))
                         #if logger is not None: logger.info("Decide made and sent")
                         decide_sent[slot_cur] = True
 
