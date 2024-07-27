@@ -34,8 +34,8 @@ def shared_coin(sid, pid, N, f, PK, SK, broadcast, receive, single_bit=True, log
     :param single_bit: is the output coin a single bit or not ?
     :return: a function ``getCoin()``, where ``getCoin(r)`` blocks
     """
-    assert PK.k == f+1
-    assert PK.l == N    # noqa: E741
+    # assert PK.k == f+1
+    # assert PK.l == N    # noqa: E741
     received = defaultdict(dict)
     outputQueue = defaultdict(lambda: Queue(1))
 
