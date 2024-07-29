@@ -342,8 +342,10 @@ def sufastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
 
         #timeout = Timeout(TIMEOUT, False)
         #timeout.start()
-
-        timeout = Timeout(TIMEOUT)
+        if slot_cur < 8:
+            timeout = Timeout(20)
+        else:
+            timeout = Timeout(TIMEOUT)
         # print(TIMEOUT)
         timeout.start()
         try:
