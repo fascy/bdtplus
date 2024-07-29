@@ -321,6 +321,7 @@ def sufastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
     recv_thread = gevent.spawn(handle_messages)
     #gevent.sleep(0)
     timeout_flag = 0
+    start_time = 0
     while slot_cur <= SLOTS_NUM + 1:
         if slot_cur == 8:
             start_time = time.time()
@@ -384,10 +385,10 @@ def sufastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
         if pending_block != None:
             sigs = ecdsa_sign(SK2, hash_prev)
             sigsp = ecdsa_sign(SK2, pending_block[2])
-            return (slot_cur, sigs, sigsp), (hash_prev, pending_block, tuple(votes[slot_cur].items()))  # represents fast_path successes
+            return (slot_cur, sigs, sigsp), (start_time, hash_prev, pending_block, tuple(votes[slot_cur].items()))  # represents fast_path successes
         else:
             sigs = ecdsa_sign(SK2, hash_prev)
-            return (slot_cur, sigs, 0), (hash_prev, 0, tuple(votes[slot_cur].items()))
+            return (slot_cur, sigs, 0), (start_time, hash_prev, 0, tuple(votes[slot_cur].items()))
 
     else:
         if pending_block != None:

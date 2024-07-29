@@ -17,7 +17,7 @@ def hash(x):
     return hashlib.sha256(pickle.dumps(x)).digest()
 
 
-def hsfastpath(sid, pid, N, f, leader, suvote, sublock, get_input, output_notraized_block, Snum, Bsize, Tout, hash_genesis, PK2s, SK2, recv, send, omitfast=False, logger=None):
+def hsfastpath(sid, pid, N, f, leader, suvote, sublock, st, get_input, output_notraized_block, Snum, Bsize, Tout, hash_genesis, PK2s, SK2, recv, send, omitfast=False, logger=None):
     """Fast path, Byzantine Safe Broadcast
     :param str sid: ``the string of identifier``
     :param int pid: ``0 <= pid < N``
@@ -276,7 +276,7 @@ def hsfastpath(sid, pid, N, f, leader, suvote, sublock, get_input, output_notrai
                 epoch_txcnt += txcnt[fixed_block[1]]
 
                 if logger is not None:
-                    logger.info('Fast block at Node %d for Epoch %s and Slot %d has delay and TXs: %s, %d' % (pid, sid, fixed_block[1], str(delay[fixed_block[1]]), txcnt[fixed_block[1]]))
+                    logger.info('Node %d-Slot %d running time: %f, delay and TXs: %s, %d' % (pid, fixed_block[1], time.time()-st, str(delay[fixed_block[1]]), txcnt[fixed_block[1]]))
                 if logger:
                     logger.info('AVG TPS: %d' % (epoch_txcnt/(time.time()-start_time)))
 

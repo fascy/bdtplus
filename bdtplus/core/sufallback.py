@@ -322,7 +322,7 @@ class SUFB():
                 latest_notarized_block, latest_notarization = o
                 fast_blocks.put(o)
 
-            fast_thread = gevent.spawn(hsfastpath, epoch_id, pid, N, f, leader, su_vote, su_block,
+            fast_thread = gevent.spawn(hsfastpath, epoch_id, pid, N, f, leader, su_vote, su_block, st,
                                    self.transaction_buffer.get_nowait, fastpath_output,
                                    self.SLOTS_NUM, self.FAST_BATCH_SIZE, T,
                                    su_hash, self.sPK2s, self.sSK2,
@@ -342,20 +342,22 @@ class SUFB():
         su_vote = set()
         su_hash = None
         su_block = None
+        st = None
         def wait_for_sufastpath():
-            nonlocal su_vote, su_hash, su_block
+            nonlocal su_vote, su_hash, su_block, st
             suoutput[0], suoutput[1] = sufast_thread.get()
             # print(suoutput[1])
 
             if self.logger != None:
                 self.logger.info('Fastpath of epoch %d completed' % e)
-            (hash_prev_su, pending_block, voteset) = suoutput[1]
+            (st, hash_prev_su, pending_block, voteset) = suoutput[1]
             if self.id == leader:
                 su_vote = set(list(voteset)[:self.N-self.f])
             else:
                 su_vote = 0
             su_hash = hash_prev_su
             su_block = pending_block
+
             if self.id == leader:
                 if len(voteset) < 2*self.f+1:
                     print("timeout in bolt!")
