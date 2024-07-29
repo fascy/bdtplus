@@ -195,7 +195,7 @@ class SUFB():
 
             def make_epoch_send(e):
                 def _send(j, o):
-                    if time.time()-self.s_time<30 or self.id not in muted_nodes:
+                    if time.time()-self.s_time<20 or self.id not in muted_nodes:
                         self._send(j, (e, o))
                 return _send
 
