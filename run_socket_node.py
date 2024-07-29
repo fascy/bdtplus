@@ -8,6 +8,7 @@ from gevent import Greenlet
 from myexperiements.sockettest.dumbo_node import DumboBFTNode
 from myexperiements.sockettest.bdt_node import BdtBFTNode
 from myexperiements.sockettest.sufp_node import SUFPNode
+from myexperiements.sockettest.sufb_node import SUFBNode
 from network.socket_server import NetworkServer
 from network.socket_client import NetworkClient
 from multiprocessing import Value as mpValue, Queue as mpQueue
@@ -21,6 +22,8 @@ def instantiate_bft_node(sid, i, B, N, f, l, K, S, T, bft_from_server: Callable,
         bft = BdtBFTNode(sid, i, S, T, B, F, N, f, bft_from_server, bft_to_client, ready, stop, K, mute=mute, omitfast=omitfast, bft_running=bft_running)
     elif protocol == "sufp":
         bft = SUFPNode(sid, i, S, T, B, F, N,  f, l, bft_from_server, bft_to_client, ready, stop, K, mute=mute, omitfast=omitfast, bft_running=bft_running)
+    elif protocol =='sufb':
+        bft = SUFBNode(sid, i, S, T, B, F, N,  f, l, bft_from_server, bft_to_client, ready, stop, K, mute=mute, omitfast=omitfast, bft_running=bft_running)
     else:
         print("Only support dumbo or mule or stable-hs or rotating-hs")
     return bft

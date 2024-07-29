@@ -17,7 +17,7 @@ def hash(x):
     return hashlib.sha256(pickle.dumps(x)).digest()
 
 
-def hsfastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, Bsize, Tout, hash_genesis, PK2s, SK2, recv, send, omitfast=False, logger=None):
+def hsfastpath(sid, pid, N, f, leader, suvote, sublock, get_input, output_notraized_block, Snum, Bsize, Tout, hash_genesis, PK2s, SK2, recv, send, omitfast=False, logger=None):
     """Fast path, Byzantine Safe Broadcast
     :param str sid: ``the string of identifier``
     :param int pid: ``0 <= pid < N``
@@ -50,7 +50,7 @@ def hsfastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
     slot_cur = 1
 
     hash_prev = hash_genesis
-    pending_block = None
+    pending_block = [sublock[0], sublock[1], sublock[2], 0, sublock[3]]
     notraized_block = None
     fixed_block = None
 
@@ -59,7 +59,7 @@ def hsfastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
     votes = defaultdict(lambda: dict())
     decides = defaultdict(lambda: Queue(1))
 
-    decide_sent = [False] * (SLOTS_NUM + 3)  # The first item of the list is not used
+    decide_sent = [False] * (SLOTS_NUM + 4)  # The first item of the list is not used
 
     msg_noncritical_signal = Event()
     msg_noncritical_signal.set()
@@ -74,7 +74,7 @@ def hsfastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
 
     epoch_txcnt = 0
     weighted_delay = 0
-
+    send_sort = []
 
 
     def handle_messages():
@@ -96,7 +96,10 @@ def hsfastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
             msg_noncritical_signal.clear()
 
             if msg[0] == 'VOTE' and pid == leader and len(voters[slot_cur]) < N - f:
-
+                # print("s", slot_cur)
+                # if logger and slot_cur < SLOTS_NUM+2:
+                #     logger.info('recv vote in %d slot from node %d, taking %f sec' % (
+                #     slot_cur, sender, time.time() - s_times[slot_cur]))
                 _, slot, hash_p, sig_p = msg
                 #_, slot, hash_p, raw_sig_p, tx_batch, tx_sig = msg
                 #sig_p = deserialize1(raw_sig_p)
@@ -136,8 +139,11 @@ def hsfastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
                     voters[slot_cur].add(sender)
 
                     votes[slot_cur][sender] = sig_p
-
+                    if slot_cur == 3:
+                        send_sort.append(sender)
                     if len(voters[slot_cur]) == N - f and not decide_sent[slot_cur]:
+                        if logger:
+                            logger.info('get n-f vote in slot %d taking %f sec' %(slot_cur, time.time()-s_times[slot_cur]))
                         #print(slot_cur)
                         Sigma = tuple(votes[slot_cur].items())
                         if slot_cur == SLOTS_NUM + 1 or slot_cur == SLOTS_NUM + 2:
@@ -147,8 +153,17 @@ def hsfastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
                                 tx_batch = json.dumps([get_input()] * BATCH_SIZE)
                             except Exception as e:
                                 tx_batch = json.dumps(['Dummy' for _ in range(BATCH_SIZE)])
-
-                        send(-2, ('DECIDE', slot_cur, hash_prev, Sigma, tx_batch))
+                        if slot_cur >= 3:
+                            b = [_ for _ in range(N) if _ not in send_sort]
+                            for i in b:
+                                send_sort.append(i)
+                            for k in reversed(send_sort):
+                                # print(time.time(), "send to", k)
+                                send(k, ('DECIDE', slot_cur, hash_prev, Sigma, tx_batch))
+                                # time.sleep(0.01)
+                        else:
+                            send(-2, ('DECIDE', slot_cur, hash_prev, Sigma, tx_batch))
+                        # send(-2, ('DECIDE', slot_cur, hash_prev, Sigma, tx_batch))
                         #if logger is not None: logger.info("Decide made and sent")
                         decide_sent[slot_cur] = True
 
@@ -188,7 +203,7 @@ def hsfastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
                 # if not decides[slot_cur].empty():
                 #     print(pid, decides[slot_cur].get_nowait())
                 decides[slot_cur].put_nowait((hash_p, Sigma_p, batches))
-                print(pid, "vote=n=f and put")
+                # print(pid, "vote=n=f and put")
 
             msg_noncritical_signal.set()
 
@@ -210,17 +225,30 @@ def hsfastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
 
         s_times[slot_cur] = time.time()
 
-        try:
-            sig_prev = ecdsa_sign(SK2, hash_prev)
-            send(leader, ('VOTE', slot_cur, hash_prev, sig_prev))
-        except AttributeError as e:
-            if logger is not None:
-                logger.info(traceback.print_exc())
+        if slot_cur == 1 and pid == leader:
+            try:
+                tx_batch = json.dumps([get_input()] * BATCH_SIZE)
+            except Exception as e:
+                tx_batch = json.dumps(['Dummy' for _ in range(BATCH_SIZE)])
+            # print(suvote)
+            # print(len(suvote))
+            send(-2, ('DECIDE', slot_cur, hash_prev, suvote, tx_batch))
+            # print(leader, "send!",  slot_cur)
+            decide_sent[slot_cur] = True
+            decides[slot_cur].put_nowait((hash_prev, suvote, tx_batch))
+            msg_noncritical_signal.set()
+        if slot_cur > 1:
+            try:
+                sig_prev = ecdsa_sign(SK2, hash_prev)
+                send(leader, ('VOTE', slot_cur, hash_prev, sig_prev))
+            except AttributeError as e:
+                if logger is not None:
+                    logger.info(traceback.print_exc())
 
         #print('4')
 
         (h_p, Sigma_p, batches) = decides[slot_cur].get()  # Block to wait for the voted block
-
+        # print(pid, "get decide", h_p)
 
         ########################
         # Enter critical block #
@@ -233,10 +261,12 @@ def hsfastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
 
             if notraized_block is not None:
                 fixed_block = notraized_block
-                assert fixed_block[1] + 2 == slot_cur
+                if slot_cur > 2:
+                    assert fixed_block[1] + 2 == slot_cur
 
             notraized_block = (pending_block[0], pending_block[1], pending_block[2], pending_block[4])
-            assert notraized_block[1] + 1 == slot_cur
+            if slot_cur > 1:
+                assert notraized_block[1] + 1 == slot_cur
 
             if fixed_block is not None:
                 e_times[fixed_block[1]] = time.time()
@@ -247,7 +277,8 @@ def hsfastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
 
                 if logger is not None:
                     logger.info('Fast block at Node %d for Epoch %s and Slot %d has delay and TXs: %s, %d' % (pid, sid, fixed_block[1], str(delay[fixed_block[1]]), txcnt[fixed_block[1]]))
-
+                if logger:
+                    logger.info('AVG TPS: %d' % (epoch_txcnt/(time.time()-start_time)))
 
             if output_notraized_block is not None:
                 output_notraized_block((notraized_block, (h_p, Sigma_p, (epoch_txcnt, weighted_delay))))
@@ -276,7 +307,8 @@ def hsfastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
     #gevent.sleep(0)
 
     while slot_cur <= SLOTS_NUM + 2:
-
+        # if slot_cur == 8:
+        start_time = time.time()
         #if logger is not None:
         #    logger.info("Enter fastpath's slot %d out of all %d slots" % (slot_cur, SLOTS_NUM))
 

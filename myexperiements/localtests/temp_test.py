@@ -1,4 +1,6 @@
-t = [_ for _ in range(4)]
-a = [2, 3]
-b = [i for i in t if i not in a]
+a =set()
+for i in range(4):
+    a.add(i)
+
+b = set(list(a)[:3])
 print(b)

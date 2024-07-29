@@ -98,8 +98,8 @@ def sufastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
             msg_noncritical_signal.clear()
 
             if msg[0] == 'VOTE' and pid == leader and len(voters[slot_cur]) < N - 1:
-                if logger:
-                    logger.info('recv vote in %d slot from node %d, taking %f sec' % (slot_cur, sender, time.time()-s_times[slot_cur]))
+                # if logger:
+                #     logger.info('recv vote in %d slot from node %d, taking %f sec' % (slot_cur, sender, time.time()-s_times[slot_cur]))
 
                 _, slot, hash_p, sig_p = msg
                 #_, slot, hash_p, raw_sig_p, tx_batch, tx_sig = msg
@@ -253,8 +253,8 @@ def sufastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
 
         slot_noncritical_signal.clear()
         msg_noncritical_signal.wait()
-        if logger:
-            logger.info('2pending block %d in %f' %(slot_cur, time.time()-s_times[slot_cur]))
+        # if logger:
+        #     logger.info('2pending block %d in %f' %(slot_cur, time.time()-s_times[slot_cur]))
 
 
         if pending_block is not None:
@@ -271,8 +271,8 @@ def sufastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
 
         pending_block_header = (sid, pending_block[1], pending_block[2], hash(pending_block[3]))
         hash_prev = hash(pending_block_header)
-        if logger:
-            logger.info('read pending block %d in %f' % (slot_cur, time.time() - s_times[slot_cur]))
+        # if logger:
+        #     logger.info('read pending block %d in %f' % (slot_cur, time.time() - s_times[slot_cur]))
         # print(pid, "pending:", slot_cur, hash(batches))
         # pending_block_header = (sid, slot_cur+1, h_p, hash(batches))
 
@@ -280,8 +280,8 @@ def sufastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
         # print(pid, "pending:", slot_cur, hash_prev)
         # assert notraized_block[1] + 1 == slot_cur
         if fixed_block is not None and fixed_block[1] >= 8:
-            if logger:
-                logger.info('3pending block %d in %f' % (slot_cur, time.time() - s_times[slot_cur]))
+            # if logger:
+            #     logger.info('3pending block %d in %f' % (slot_cur, time.time() - s_times[slot_cur]))
             e_times[fixed_block[1]] = time.time()
             delay[fixed_block[1]] = e_times[fixed_block[1]] - s_times[fixed_block[1]]
             if logger:
