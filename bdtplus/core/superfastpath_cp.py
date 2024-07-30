@@ -97,7 +97,7 @@ def sufastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
 
             msg_noncritical_signal.clear()
 
-            if msg[0] == 'VOTE' and pid == leader and len(voters[slot_cur]) < N - 1:
+            if msg[0] == 'VOTE' and pid == leader and len(voters[slot_cur]) < N :
                 # if logger:
                 #     logger.info('recv vote in %d slot from node %d, taking %f sec' % (slot_cur, sender, time.time()-s_times[slot_cur]))
 
@@ -142,7 +142,7 @@ def sufastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
                     votes[slot_cur][sender] = sig_p
                     if slot_cur == 3:
                         send_sort.append(sender)
-                    if len(voters[slot_cur]) == N-1 and not decide_sent[slot_cur]:
+                    if len(voters[slot_cur]) == N and not decide_sent[slot_cur]:
                         if logger:
                             logger.info('get n vote in slot %d taking %f sec' %(slot_cur, time.time()-s_times[slot_cur]))
                         #print(slot_cur)
@@ -185,7 +185,7 @@ def sufastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
                     continue
                 if slot_cur > 1:
                     try:
-                        assert len(Sigma_p) == N-1
+                        assert len(Sigma_p) == N
                     except AssertionError:
                         if logger is not None:
                             logger.info("No enough ecdsa signatures!")
@@ -222,91 +222,95 @@ def sufastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
     """
     One slot
     """
-
+    muted_nodes = [node for node in range(1, int((N - 1) / 3) + 1)]
     def one_slot():
+
         nonlocal pending_block, notraized_block, fixed_block, hash_prev, slot_cur, epoch_txcnt, delay, e_times, s_times, txcnt, weighted_delay, weighted_tps
 
         #print('3')
+        if slot_cur < 20 or pid not in muted_nodes:
+            if logger is not None:
+                logger.info("Entering slot %d" % slot_cur)
 
-        if logger is not None:
-            logger.info("Entering slot %d" % slot_cur)
-
-        s_times[slot_cur] = time.time()
-        if pid != leader:
-            try:
+            s_times[slot_cur] = time.time()
+            if pid != leader:
+                try:
+                    sig_prev = ecdsa_sign(SK2, hash_prev)
+                    send(leader, ('VOTE', slot_cur, hash_prev, sig_prev))
+                except AttributeError as e:
+                    if logger is not None:
+                        logger.info(traceback.print_exc())
+            else:
                 sig_prev = ecdsa_sign(SK2, hash_prev)
-                send(leader, ('VOTE', slot_cur, hash_prev, sig_prev))
-            except AttributeError as e:
-                if logger is not None:
-                    logger.info(traceback.print_exc())
+                votes[slot_cur][pid] = sig_prev
+                voters[slot_cur].add(pid)
 
+            #print('4')
 
-        #print('4')
-
-        (h_p, Sigma_p, batches) = decides[slot_cur].get()  # Block to wait for the voted block
-        if logger:
-            logger.info('pending block %d in %f' %(slot_cur, time.time()-s_times[slot_cur]))
-
-        ########################
-        # Enter critical block #
-        ########################
-
-        slot_noncritical_signal.clear()
-        msg_noncritical_signal.wait()
-        # if logger:
-        #     logger.info('2pending block %d in %f' %(slot_cur, time.time()-s_times[slot_cur]))
-
-
-        if pending_block is not None:
-            # fixed_block = pending_block
-            #fix block: sid, s-1, hash(B_{s-2}), B_{s-1}, Sigma_{s-1}
-            fixed_block = pending_block
-            fixed_block[4] = Sigma_p
-
-            # assert fixed_block[1] + 2 == slot_cur
-            print(pid, "in slot", slot_cur, "fix", fixed_block[1])
-
-        # pending block: sid s, hash(B_{s-1}), B_s, Sigma_s(as bot)
-        pending_block = [sid, slot_cur, hash_prev, batches, 0]
-
-        pending_block_header = (sid, pending_block[1], pending_block[2], hash(pending_block[3]))
-        hash_prev = hash(pending_block_header)
-        # if logger:
-        #     logger.info('read pending block %d in %f' % (slot_cur, time.time() - s_times[slot_cur]))
-        # print(pid, "pending:", slot_cur, hash(batches))
-        # pending_block_header = (sid, slot_cur+1, h_p, hash(batches))
-
-
-        # print(pid, "pending:", slot_cur, hash_prev)
-        # assert notraized_block[1] + 1 == slot_cur
-        if fixed_block is not None and fixed_block[1] >= 8:
-            # if logger:
-            #     logger.info('3pending block %d in %f' % (slot_cur, time.time() - s_times[slot_cur]))
-            e_times[fixed_block[1]] = time.time()
-            delay[fixed_block[1]] = e_times[fixed_block[1]] - s_times[fixed_block[1]]
+            (h_p, Sigma_p, batches) = decides[slot_cur].get()  # Block to wait for the voted block
             if logger:
-                logger.info('delay block %d in %f' % (fixed_block[1], delay[fixed_block[1]]))
-            txcnt[fixed_block[1]] = str(fixed_block).count("Dummy TX")
-            weighted_delay = (epoch_txcnt * weighted_delay + txcnt[fixed_block[1]] * delay[fixed_block[1]]) / (epoch_txcnt + txcnt[fixed_block[1]])
-            print(slot_cur, "weighted_delay\t", weighted_delay)
-            epoch_txcnt += txcnt[fixed_block[1]]
+                logger.info('pending block %d in %f' %(slot_cur, time.time()-s_times[slot_cur]))
+
+            ########################
+            # Enter critical block #
+            ########################
+
+            slot_noncritical_signal.clear()
+            msg_noncritical_signal.wait()
+            # if logger:
+            #     logger.info('2pending block %d in %f' %(slot_cur, time.time()-s_times[slot_cur]))
+
+
+            if pending_block is not None:
+                # fixed_block = pending_block
+                #fix block: sid, s-1, hash(B_{s-2}), B_{s-1}, Sigma_{s-1}
+                fixed_block = pending_block
+                fixed_block[4] = Sigma_p
+
+                # assert fixed_block[1] + 2 == slot_cur
+                print(pid, "in slot", slot_cur, "fix", fixed_block[1])
+
+            # pending block: sid s, hash(B_{s-1}), B_s, Sigma_s(as bot)
+            pending_block = [sid, slot_cur, hash_prev, batches, 0]
+
+            pending_block_header = (sid, pending_block[1], pending_block[2], hash(pending_block[3]))
+            hash_prev = hash(pending_block_header)
+            # if logger:
+            #     logger.info('read pending block %d in %f' % (slot_cur, time.time() - s_times[slot_cur]))
+            # print(pid, "pending:", slot_cur, hash(batches))
+            # pending_block_header = (sid, slot_cur+1, h_p, hash(batches))
+
+
+            # print(pid, "pending:", slot_cur, hash_prev)
+            # assert notraized_block[1] + 1 == slot_cur
+            if fixed_block is not None and fixed_block[1] >= 8:
+                # if logger:
+                #     logger.info('3pending block %d in %f' % (slot_cur, time.time() - s_times[slot_cur]))
+                e_times[fixed_block[1]] = time.time()
+                delay[fixed_block[1]] = e_times[fixed_block[1]] - s_times[fixed_block[1]]
+                if logger:
+                    logger.info('delay block %d in %f' % (fixed_block[1], delay[fixed_block[1]]))
+                txcnt[fixed_block[1]] = str(fixed_block).count("Dummy TX")
+                weighted_delay = (epoch_txcnt * weighted_delay + txcnt[fixed_block[1]] * delay[fixed_block[1]]) / (epoch_txcnt + txcnt[fixed_block[1]])
+                print(slot_cur, "weighted_delay\t", weighted_delay)
+                epoch_txcnt += txcnt[fixed_block[1]]
+
+                if logger is not None:
+                    logger.info('Fast block at Node %d for Epoch %s and Slot %d has delay, TPS and TXs: %s, %d' % (pid, sid, fixed_block[1], str(delay[fixed_block[1]]), epoch_txcnt))
+                if logger:
+                    logger.info('AVG TPS: %d, running time %f, weighted delay: %f' % (epoch_txcnt/(time.time()-start_time), time.time()-start_time, weighted_delay))
+
+                if output_notraized_block is not None:
+                    output_notraized_block((fixed_block, (epoch_txcnt, weighted_delay)))
+                if logger:
+                    logger.info('output block for slot %d taking %f sec' % (fixed_block[1], time.time()-s_times[fixed_block[1]]))
+                weighted_tps = epoch_txcnt/(time.time()-start_time)
 
             if logger is not None:
-                logger.info('Fast block at Node %d for Epoch %s and Slot %d has delay, TPS and TXs: %s, %d' % (pid, sid, fixed_block[1], str(delay[fixed_block[1]]), epoch_txcnt))
-            if logger:
-                logger.info('AVG TPS: %d, running time %f, weighted delay: %f' % (epoch_txcnt/(time.time()-start_time), time.time()-start_time, weighted_delay))
+                logger.info("Leaving slot %d" % slot_cur)
 
-            if output_notraized_block is not None:
-                output_notraized_block((fixed_block, (epoch_txcnt, weighted_delay)))
-            if logger:
-                logger.info('output block for slot %d taking %f sec' % (fixed_block[1], time.time()-s_times[fixed_block[1]]))
-            weighted_tps = epoch_txcnt/(time.time()-start_time)
-
-        if logger is not None:
-            logger.info("Leaving slot %d" % slot_cur)
-
-        slot_cur = slot_cur + 1
-        slot_noncritical_signal.set()
+            slot_cur = slot_cur + 1
+            slot_noncritical_signal.set()
 
 
 
@@ -385,10 +389,12 @@ def sufastpath(sid, pid, N, f, leader, get_input, output_notraized_block, Snum, 
         if pending_block != None:
             sigs = ecdsa_sign(SK2, hash_prev)
             sigsp = ecdsa_sign(SK2, pending_block[2])
-            return (slot_cur, sigs, sigsp), (start_time, hash_prev, pending_block, tuple(votes[slot_cur].items()))  # represents fast_path successes
+            print("pedning slot", slot_cur, s_times[slot_cur])
+            return (slot_cur, sigs, sigsp), (s_times[slot_cur], start_time, hash_prev, pending_block, tuple(votes[slot_cur].items()))  # represents fast_path successes
+
         else:
             sigs = ecdsa_sign(SK2, hash_prev)
-            return (slot_cur, sigs, 0), (start_time, hash_prev, 0, tuple(votes[slot_cur].items()))
+            return (slot_cur, sigs, 0), (0, start_time, hash_prev, 0, tuple(votes[slot_cur].items()))
 
     else:
         if pending_block != None:

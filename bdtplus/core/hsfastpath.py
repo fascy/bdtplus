@@ -17,7 +17,7 @@ def hash(x):
     return hashlib.sha256(pickle.dumps(x)).digest()
 
 
-def hsfastpath(sid, pid, N, f, leader, suvote, sublock, st, get_input, output_notraized_block, Snum, Bsize, Tout, hash_genesis, PK2s, SK2, recv, send, omitfast=False, logger=None):
+def hsfastpath(sid, pid, N, f, leader, suvote, sublock, st, st_s, get_input, output_notraized_block, Snum, Bsize, Tout, hash_genesis, PK2s, SK2, recv, send, omitfast=False, logger=None):
     """Fast path, Byzantine Safe Broadcast
     :param str sid: ``the string of identifier``
     :param int pid: ``0 <= pid < N``
@@ -270,7 +270,11 @@ def hsfastpath(sid, pid, N, f, leader, suvote, sublock, st, get_input, output_no
 
             if fixed_block is not None:
                 e_times[fixed_block[1]] = time.time()
-                delay[fixed_block[1]] = e_times[fixed_block[1]] - s_times[fixed_block[1]]
+                if slot_cur==2 and fixed_block[1]>10:
+                    print("here", fixed_block[1], st_s)
+                    delay[fixed_block[1]] = e_times[fixed_block[1]] - st_s
+                else:
+                    delay[fixed_block[1]] = e_times[fixed_block[1]] - s_times[fixed_block[1]]
                 txcnt[fixed_block[1]] = str(fixed_block).count("Dummy TX")
                 weighted_delay = (epoch_txcnt * weighted_delay + txcnt[fixed_block[1]] * delay[fixed_block[1]]) / (epoch_txcnt + txcnt[fixed_block[1]])
                 epoch_txcnt += txcnt[fixed_block[1]]

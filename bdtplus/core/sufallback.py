@@ -195,8 +195,8 @@ class SUFB():
 
             def make_epoch_send(e):
                 def _send(j, o):
-                    if time.time()-self.s_time<20 or self.id not in muted_nodes:
-                        self._send(j, (e, o))
+                    # if time.time()-self.s_time<20 or self.id not in muted_nodes:
+                    self._send(j, (e, o))
                 return _send
 
             send_e = make_epoch_send(e)
@@ -322,7 +322,7 @@ class SUFB():
                 latest_notarized_block, latest_notarization = o
                 fast_blocks.put(o)
 
-            fast_thread = gevent.spawn(hsfastpath, epoch_id, pid, N, f, leader, su_vote, su_block, st,
+            fast_thread = gevent.spawn(hsfastpath, epoch_id, pid, N, f, leader, su_vote, su_block, st, st_s,
                                    self.transaction_buffer.get_nowait, fastpath_output,
                                    self.SLOTS_NUM, self.FAST_BATCH_SIZE, T,
                                    su_hash, self.sPK2s, self.sSK2,
@@ -343,14 +343,15 @@ class SUFB():
         su_hash = None
         su_block = None
         st = None
+        st_s = 0
         def wait_for_sufastpath():
-            nonlocal su_vote, su_hash, su_block, st
+            nonlocal su_vote, su_hash, su_block, st, st_s
             suoutput[0], suoutput[1] = sufast_thread.get()
             # print(suoutput[1])
 
             if self.logger != None:
                 self.logger.info('Fastpath of epoch %d completed' % e)
-            (st, hash_prev_su, pending_block, voteset) = suoutput[1]
+            (st_s, st, hash_prev_su, pending_block, voteset) = suoutput[1]
             if self.id == leader:
                 su_vote = set(list(voteset)[:self.N-self.f])
             else:
@@ -360,7 +361,7 @@ class SUFB():
 
             if self.id == leader:
                 if len(voteset) < 2*self.f+1:
-                    print("timeout in bolt!")
+                    print("timeout in bolt!", len(voteset))
                     if self.logger:
                         self.logger.info('timeout in bolt!')
                 else:
@@ -375,15 +376,18 @@ class SUFB():
         #    g.link(lambda *args: ready.set())
 
         vc1_ready.wait()
+        if self.id not in [node for node in range(1, int((self.N - 1) / 3) + 1)]:
+            print(self.id, "start bolt")
+            fast_thread = _setup_fastpath(leader)
+            def wait_for_fastpath():
+                fast_thread.get()
+                vc_ready.set()
+                if self.logger != None:
+                    self.logger.info('Fastpath of epoch %d completed' % e)
 
-        fast_thread = _setup_fastpath(leader)
-        def wait_for_fastpath():
-            fast_thread.get()
-            vc_ready.set()
-            if self.logger != None:
-                self.logger.info('Fastpath of epoch %d completed' % e)
-
-        a = gevent.spawn(wait_for_fastpath)
-        a.join()
+            a = gevent.spawn(wait_for_fastpath)
+            a.join()
+        else:
+            gevent.sleep(20)
         start_vc = time.time()
 
